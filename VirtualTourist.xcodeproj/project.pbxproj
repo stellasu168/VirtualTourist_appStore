@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		55AA11801C5984FF00977620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA117F1C5984FF00977620 /* AppDelegate.swift */; };
-		55AA11821C5984FF00977620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11811C5984FF00977620 /* ViewController.swift */; };
+		55AA11821C5984FF00977620 /* LocationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11811C5984FF00977620 /* LocationMapViewController.swift */; };
 		55AA11851C5984FF00977620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55AA11831C5984FF00977620 /* Main.storyboard */; };
 		55AA11881C59850000977620 /* VirtualTourist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11861C5984FF00977620 /* VirtualTourist.xcdatamodeld */; };
 		55AA118A1C59850000977620 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55AA11891C59850000977620 /* Assets.xcassets */; };
 		55AA118D1C59850000977620 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55AA118B1C59850000977620 /* LaunchScreen.storyboard */; };
 		55AA11981C59850000977620 /* VirtualTouristUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11971C59850000977620 /* VirtualTouristUITests.swift */; };
+		55AA11A31C59859D00977620 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11A21C59859D00977620 /* Pin.swift */; };
+		55AA11A51C5985D500977620 /* Pictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11A41C5985D500977620 /* Pictures.swift */; };
+		55AA11A71C5A1C8800977620 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55AA11A61C5A1C8800977620 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,7 +32,7 @@
 /* Begin PBXFileReference section */
 		55AA117C1C5984FF00977620 /* VirtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55AA117F1C5984FF00977620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		55AA11811C5984FF00977620 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		55AA11811C5984FF00977620 /* LocationMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapViewController.swift; sourceTree = "<group>"; };
 		55AA11841C5984FF00977620 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		55AA11871C59850000977620 /* VirtualTourist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VirtualTourist.xcdatamodel; sourceTree = "<group>"; };
 		55AA11891C59850000977620 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +41,9 @@
 		55AA11931C59850000977620 /* VirtualTouristUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VirtualTouristUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55AA11971C59850000977620 /* VirtualTouristUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTouristUITests.swift; sourceTree = "<group>"; };
 		55AA11991C59850000977620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55AA11A21C59859D00977620 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
+		55AA11A41C5985D500977620 /* Pictures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pictures.swift; sourceTree = "<group>"; };
+		55AA11A61C5A1C8800977620 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55AA11A71C5A1C8800977620 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +68,7 @@
 		55AA11731C5984FF00977620 = {
 			isa = PBXGroup;
 			children = (
+				55AA11A61C5A1C8800977620 /* MapKit.framework */,
 				55AA117E1C5984FF00977620 /* VirtualTourist */,
 				55AA11961C59850000977620 /* VirtualTouristUITests */,
 				55AA117D1C5984FF00977620 /* Products */,
@@ -80,7 +88,9 @@
 			isa = PBXGroup;
 			children = (
 				55AA117F1C5984FF00977620 /* AppDelegate.swift */,
-				55AA11811C5984FF00977620 /* ViewController.swift */,
+				55AA11811C5984FF00977620 /* LocationMapViewController.swift */,
+				55AA11A21C59859D00977620 /* Pin.swift */,
+				55AA11A41C5985D500977620 /* Pictures.swift */,
 				55AA11831C5984FF00977620 /* Main.storyboard */,
 				55AA11891C59850000977620 /* Assets.xcassets */,
 				55AA118B1C59850000977620 /* LaunchScreen.storyboard */,
@@ -149,6 +159,11 @@
 				TargetAttributes = {
 					55AA117B1C5984FF00977620 = {
 						CreatedOnToolsVersion = 7.2;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					55AA11921C59850000977620 = {
 						CreatedOnToolsVersion = 7.2;
@@ -200,9 +215,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55AA11821C5984FF00977620 /* ViewController.swift in Sources */,
+				55AA11821C5984FF00977620 /* LocationMapViewController.swift in Sources */,
+				55AA11A51C5985D500977620 /* Pictures.swift in Sources */,
 				55AA11801C5984FF00977620 /* AppDelegate.swift in Sources */,
 				55AA11881C59850000977620 /* VirtualTourist.xcdatamodeld in Sources */,
+				55AA11A31C59859D00977620 /* Pin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

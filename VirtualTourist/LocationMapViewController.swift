@@ -52,14 +52,27 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         let annotation = MKPointAnnotation()
         annotation.coordinate = touchMapCoordinate
         
-
-        
-        
         mapView.addAnnotation(annotation)
     }
 
     // Pin will transition to the Phone Album View when a pin is tapped
+    // Start by updating the view for the annotation. This is necessary because it allows you to intercept taps on the annotation's view (the pin).
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+        annotationView.canShowCallout = false
+        
+        return annotationView
+    }
+
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        mapView.deselectAnnotation(view.annotation, animated: true)
+        
+        // do other things
+        print("Go to the next view with the coordinates")
+        
+    }
 
 
+    
 }
 

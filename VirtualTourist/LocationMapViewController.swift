@@ -68,7 +68,14 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         mapView.deselectAnnotation(view.annotation, animated: true)
         
         // do other things
-        print("Go to the next view with the coordinates")
+        
+        guard let annotation = view.annotation else { /* no annotation */ return }
+        let latitude = annotation.coordinate.latitude
+        let longitude = annotation.coordinate.longitude
+        let title = annotation.title
+        mapView.deselectAnnotation(annotation, animated: true)
+        print(latitude, longitude, title)
+        
         
     }
 

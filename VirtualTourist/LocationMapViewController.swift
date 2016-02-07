@@ -52,6 +52,31 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         let annotation = MKPointAnnotation()
         annotation.coordinate = touchMapCoordinate
         
+        
+        let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+        
+        //annotation.title = "Dropped Pin"
+        //annotation.subtitle = CLGeocoder().reverseGeocodeLocation(coordinates, completionHandler: )
+        
+        let geoCoder = CLGeocoder()
+        var _: AnyObject
+        var _: NSError
+        
+        geoCoder.reverseGeocodeLocation(coordinates, completionHandler: { (placemark, error) -> Void in
+            if error != nil {
+                print("Error: \(error!.localizedDescription)")
+                return
+            }
+            
+            if placemark!.count > 0 {
+                let pm = placemark![0] as CLPlacemark
+                annotation.title = "\(pm.locality), \(pm.country)"
+            } else {
+                print("Error with data")
+            }
+        })
+
+        
         mapView.addAnnotation(annotation)
     }
 
@@ -65,11 +90,13 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     }
 
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        
         mapView.deselectAnnotation(view.annotation, animated: true)
         
         // do other things
         
         guard let annotation = view.annotation else { /* no annotation */ return }
+       
         let latitude = annotation.coordinate.latitude
         let longitude = annotation.coordinate.longitude
         let title = annotation.title

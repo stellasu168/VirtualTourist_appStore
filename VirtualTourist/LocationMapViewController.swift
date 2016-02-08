@@ -67,7 +67,6 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
                 print("Error: \(error!.localizedDescription)")
                 return
             }
-            
             if placemark!.count > 0 {
                 let pm = placemark![0] as CLPlacemark
                 annotation.title = "\(pm.locality), \(pm.country)"
@@ -97,13 +96,15 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
         guard let annotation = view.annotation else { /* no annotation */ return }
        
-        let latitude = annotation.coordinate.latitude
-        let longitude = annotation.coordinate.longitude
+        // let latitude = annotation.coordinate.latitude
+        // let longitude = annotation.coordinate.longitude
         let title = annotation.title
         mapView.deselectAnnotation(annotation, animated: true)
-        print(latitude, longitude, title)
+        print(title)
         
-        
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("PhotoAlbum")
+        self.presentViewController(controller!, animated: true, completion: nil)
+
     }
 
 

@@ -17,6 +17,7 @@
 		55AA11A31C59859D00977620 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11A21C59859D00977620 /* Pin.swift */; };
 		55AA11A51C5985D500977620 /* Pictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11A41C5985D500977620 /* Pictures.swift */; };
 		55AA11A71C5A1C8800977620 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55AA11A61C5A1C8800977620 /* MapKit.framework */; };
+		55AA11A91C683AAF00977620 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11A81C683AAF00977620 /* PhotoAlbumViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		55AA11A21C59859D00977620 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		55AA11A41C5985D500977620 /* Pictures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pictures.swift; sourceTree = "<group>"; };
 		55AA11A61C5A1C8800977620 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		55AA11A81C683AAF00977620 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 			children = (
 				55AA117F1C5984FF00977620 /* AppDelegate.swift */,
 				55AA11811C5984FF00977620 /* LocationMapViewController.swift */,
+				55AA11A81C683AAF00977620 /* PhotoAlbumViewController.swift */,
 				55AA11A21C59859D00977620 /* Pin.swift */,
 				55AA11A41C5985D500977620 /* Pictures.swift */,
 				55AA11831C5984FF00977620 /* Main.storyboard */,
@@ -220,6 +223,7 @@
 				55AA11801C5984FF00977620 /* AppDelegate.swift in Sources */,
 				55AA11881C59850000977620 /* VirtualTourist.xcdatamodeld in Sources */,
 				55AA11A31C59859D00977620 /* Pin.swift in Sources */,
+				55AA11A91C683AAF00977620 /* PhotoAlbumViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

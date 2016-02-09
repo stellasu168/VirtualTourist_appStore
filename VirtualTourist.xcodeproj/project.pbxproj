@@ -18,6 +18,7 @@
 		55AA11A51C5985D500977620 /* Pictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11A41C5985D500977620 /* Pictures.swift */; };
 		55AA11A71C5A1C8800977620 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55AA11A61C5A1C8800977620 /* MapKit.framework */; };
 		55AA11A91C683AAF00977620 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11A81C683AAF00977620 /* PhotoAlbumViewController.swift */; };
+		55AA11AB1C69DA7700977620 /* FlickrClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11AA1C69DA7700977620 /* FlickrClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		55AA11A41C5985D500977620 /* Pictures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pictures.swift; sourceTree = "<group>"; };
 		55AA11A61C5A1C8800977620 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		55AA11A81C683AAF00977620 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
+		55AA11AA1C69DA7700977620 /* FlickrClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				55AA118B1C59850000977620 /* LaunchScreen.storyboard */,
 				55AA118E1C59850000977620 /* Info.plist */,
 				55AA11861C5984FF00977620 /* VirtualTourist.xcdatamodeld */,
+				55AA11AA1C69DA7700977620 /* FlickrClient.swift */,
 			);
 			path = VirtualTourist;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 			files = (
 				55AA11821C5984FF00977620 /* LocationMapViewController.swift in Sources */,
 				55AA11A51C5985D500977620 /* Pictures.swift in Sources */,
+				55AA11AB1C69DA7700977620 /* FlickrClient.swift in Sources */,
 				55AA11801C5984FF00977620 /* AppDelegate.swift in Sources */,
 				55AA11881C59850000977620 /* VirtualTourist.xcdatamodeld in Sources */,
 				55AA11A31C59859D00977620 /* Pin.swift in Sources */,
@@ -413,6 +417,7 @@
 				55AA119E1C59850000977620 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55AA119F1C59850000977620 /* Build configuration list for PBXNativeTarget "VirtualTouristUITests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +426,7 @@
 				55AA11A11C59850000977620 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

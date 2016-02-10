@@ -44,6 +44,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
 
     // http://stackoverflow.com/questions/5182082/mkmapview-drop-a-pin-on-touch
     func handleLongPress(getstureRecognizer : UIGestureRecognizer){
+        
         if getstureRecognizer.state != .Began { return }
         
         let touchPoint = getstureRecognizer.locationInView(self.mapView)
@@ -69,7 +70,9 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
             }
             if placemark!.count > 0 {
                 let pm = placemark![0] as CLPlacemark
-                annotation.title = "\(pm.locality), \(pm.country)"
+                if (pm.locality != nil) && (pm.country != nil) {
+                    annotation.title = "\(pm.locality!), \(pm.country!)"
+                }
             } else {
                 print("Error with data")
             }
@@ -92,15 +95,14 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
         mapView.deselectAnnotation(view.annotation, animated: true)
         
-        // do other things
-        
+        // do other things when pin is selected
         guard let annotation = view.annotation else { /* no annotation */ return }
        
         // let latitude = annotation.coordinate.latitude
         // let longitude = annotation.coordinate.longitude
-        let title = annotation.title
+        let title = annotation.title!
         mapView.deselectAnnotation(annotation, animated: true)
-        print(title)
+        print(title!)
         
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("PhotoAlbum")
         self.presentViewController(controller!, animated: true, completion: nil)

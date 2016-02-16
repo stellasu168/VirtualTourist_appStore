@@ -16,8 +16,10 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var deleteLabel: UILabel!
+    @IBOutlet weak var editButton: UINavigationItem!
     
     var selectedPin: Pin? = nil
+    var editingPins: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,20 +31,16 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
         // Set the map view delegate
         mapView.delegate = self
-        
         deleteLabel.hidden = true
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     // I need to push the view up a little bit
     @IBAction func editClicked(sender: AnyObject) {
         deleteLabel.hidden = false
-        
+        editingPins = true
+    
     }
 
     // http://stackoverflow.com/questions/5182082/mkmapview-drop-a-pin-on-touch

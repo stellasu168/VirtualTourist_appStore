@@ -18,14 +18,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6Zf-yI-Tbd">
-                                <rect key="frame" x="0.0" y="20" width="320" height="165"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="187"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bB-ms-375">
                                 <rect key="frame" x="0.0" y="529" width="320" height="39"/>
                                 <state key="normal" title="New Collection"/>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KCV-bn-Hzx">
-                                <rect key="frame" x="0.0" y="183" width="320" height="347"/>
+                                <rect key="frame" x="0.0" y="205" width="320" height="325"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="G3R-k3-igT">
                                     <size key="itemSize" width="94" height="84"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -53,7 +53,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hYF-Yz-XSg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="389" y="333"/>
+            <point key="canvasLocation" x="557" y="297"/>
         </scene>
         <!--Virtual Tourist-->
         <scene sceneID="tne-QT-ifu">
@@ -89,13 +89,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="deleteLabel" destination="BvQ-F9-lGE" id="CTz-Xh-usP"/>
+                        <outlet property="editButton" destination="kyB-5d-8IE" id="1Gc-pn-duZ"/>
                         <outlet property="mapView" destination="bk4-s1-Skg" id="evR-O0-SaA"/>
-                        <segue destination="Uc6-3S-KMZ" kind="push" identifier="PhotoAlbum" id="0mX-bT-opq"/>
+                        <segue destination="Uc6-3S-KMZ" kind="push" identifier="PhotoAlbum" id="j6n-GB-aj4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7" y="333"/>
+            <point key="canvasLocation" x="137" y="297"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2TZ-6h-JH8">

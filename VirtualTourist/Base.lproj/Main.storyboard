@@ -74,7 +74,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bk4-s1-Skg" customClass="LocationMapViewController">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bk4-s1-Skg">
                                 <rect key="frame" x="0.0" y="64" width="320" height="464"/>
                             </mapView>
                         </subviews>
@@ -90,7 +90,7 @@
                     <connections>
                         <outlet property="deleteLabel" destination="BvQ-F9-lGE" id="CTz-Xh-usP"/>
                         <outlet property="mapView" destination="bk4-s1-Skg" id="evR-O0-SaA"/>
-                        <segue destination="Uc6-3S-KMZ" kind="push" id="0mX-bT-opq"/>
+                        <segue destination="Uc6-3S-KMZ" kind="push" identifier="PhotoAlbum" id="0mX-bT-opq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

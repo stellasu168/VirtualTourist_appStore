@@ -39,7 +39,7 @@ class FlickrClient: NSObject {
                     let newError = FlickrClient.errorForResponse(data, response: response, error: error)
                     completionHandler(result: nil, error: newError)
                 } else {
-                    FlickrClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+                    FlickrClient.parseJSONWithCompletionHandler(data!, completionHandler: completionHandler)
                 }
             }
             

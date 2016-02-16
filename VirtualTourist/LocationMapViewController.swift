@@ -104,7 +104,9 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         // let longitude = annotation.coordinate.longitude
         let title = annotation.title!
         mapView.deselectAnnotation(annotation, animated: true)
-        print(title!)
+        if title != nil {
+            print(title!)
+        }
         
         // Move to the Phone Album view controller
         //let controller = self.storyboard?.instantiateViewControllerWithIdentifier("PhotoAlbum")

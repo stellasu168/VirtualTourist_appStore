@@ -14,7 +14,7 @@ class PhotoAlbumViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(pin?.latitude)
+        print(pin?.coordinate.latitude)
         // Do any additional setup after loading the view.
     }
 

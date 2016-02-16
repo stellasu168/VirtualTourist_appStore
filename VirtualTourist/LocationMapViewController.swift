@@ -99,6 +99,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
         // do other things when pin is selected
         guard let annotation = view.annotation else { /* no annotation */ return }
+        
        
         // let latitude = annotation.coordinate.latitude
         // let longitude = annotation.coordinate.longitude
@@ -109,8 +110,8 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         }
         
         // Move to the Phone Album view controller
-        //let controller = self.storyboard?.instantiateViewControllerWithIdentifier("PhotoAlbum")
-        //self.presentViewController(controller!, animated: true, completion: nil)
+        let selectedPin = annotation
+
         self.performSegueWithIdentifier("PhotoAlbum", sender: nil)
         
         }

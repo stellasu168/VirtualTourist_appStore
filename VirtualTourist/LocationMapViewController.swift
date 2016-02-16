@@ -10,6 +10,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreData
 
 class LocationMapViewController: UIViewController, MKMapViewDelegate {
 
@@ -93,6 +94,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         return annotationView
     }
 
+    
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         
         mapView.deselectAnnotation(view.annotation, animated: true)
@@ -100,28 +102,27 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         // do other things when pin is selected
         guard let annotation = view.annotation else { /* no annotation */ return }
         
-       
-        // let latitude = annotation.coordinate.latitude
-        // let longitude = annotation.coordinate.longitude
         let title = annotation.title!
         mapView.deselectAnnotation(annotation, animated: true)
         if title != nil {
             print(title!)
+            
         }
         
-        // Move to the Phone Album view controller
         let selectedPin = annotation
-
+        print(selectedPin.coordinate.latitude)
+        
+        // Move to the Phone Album View Controller
         self.performSegueWithIdentifier("PhotoAlbum", sender: nil)
         
-        }
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         if (segue.identifier == "PhotoAlbum") {
             let viewController = segue.destinationViewController as! PhotoAlbumViewController
+            print(selectedPin?.coordinate.latitude)
             viewController.pin = selectedPin
-            
+        
         }
         
     }

@@ -16,6 +16,8 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var deleteLabel: UILabel!
     
+    var selectedPin: Pin? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -104,12 +106,46 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         mapView.deselectAnnotation(annotation, animated: true)
         print(title!)
         
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("PhotoAlbum")
-        self.presentViewController(controller!, animated: true, completion: nil)
-
+        // Move to the Phone Album view controller
+        //let controller = self.storyboard?.instantiateViewControllerWithIdentifier("PhotoAlbum")
+        //self.presentViewController(controller!, animated: true, completion: nil)
+        self.performSegueWithIdentifier("PhotoAlbum", sender: nil)
+        
+        }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if (segue.identifier == "PhotoAlbum") {
+            let viewController = segue.destinationViewController as! PhotoAlbumViewController
+            viewController.pin = selectedPin
+            
+        }
+        
     }
 
 
+ 
+    
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

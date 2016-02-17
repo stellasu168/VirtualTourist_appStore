@@ -54,11 +54,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         let annotation = MKPointAnnotation()
         annotation.coordinate = touchMapCoordinate
         
-        
         let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
-        
-        //annotation.title = "Dropped Pin"
-        //annotation.subtitle = CLGeocoder().reverseGeocodeLocation(coordinates, completionHandler: )
         
         let geoCoder = CLGeocoder()
         var _: AnyObject
@@ -78,7 +74,6 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
                 print("Error with data")
             }
         })
-
         
         mapView.addAnnotation(annotation)
     }

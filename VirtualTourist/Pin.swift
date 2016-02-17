@@ -9,16 +9,14 @@ import UIKit
 import MapKit
 import CoreData
 
-@objc(Pin)
-
 class Pin: NSManagedObject, MKAnnotation {
     
     // MARK: - Pin model properties
     
     @NSManaged var latitude: Double
     @NSManaged var longitude: Double
-    @NSManaged var pageNumber: NSNumber?
     @NSManaged var photos: NSMutableOrderedSet
+    @NSManaged var pageNumber: Int
     
     var coordinate: CLLocationCoordinate2D {
         
@@ -35,7 +33,6 @@ class Pin: NSManagedObject, MKAnnotation {
     // MARK: - Init model
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
-        
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
     
@@ -48,5 +45,6 @@ class Pin: NSManagedObject, MKAnnotation {
         self.latitude = coordinate.latitude
         self.longitude = coordinate.longitude
         self.photos = NSMutableOrderedSet()
+        self.pageNumber = 1
     }
 }

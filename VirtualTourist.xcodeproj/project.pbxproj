@@ -75,6 +75,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		550172551C7459270086DC28 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				55AA11A21C59859D00977620 /* Pin.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		550172561C7464770086DC28 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				55AA11811C5984FF00977620 /* LocationMapViewController.swift */,
+				55AA11A81C683AAF00977620 /* PhotoAlbumViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		55AA11731C5984FF00977620 = {
 			isa = PBXGroup;
 			children = (
@@ -97,10 +114,9 @@
 		55AA117E1C5984FF00977620 /* VirtualTourist */ = {
 			isa = PBXGroup;
 			children = (
+				550172561C7464770086DC28 /* Controller */,
+				550172551C7459270086DC28 /* Model */,
 				55AA117F1C5984FF00977620 /* AppDelegate.swift */,
-				55AA11811C5984FF00977620 /* LocationMapViewController.swift */,
-				55AA11A81C683AAF00977620 /* PhotoAlbumViewController.swift */,
-				55AA11A21C59859D00977620 /* Pin.swift */,
 				55AA11A41C5985D500977620 /* Pictures.swift */,
 				55AA11AA1C69DA7700977620 /* FlickrClient.swift */,
 				5501720B1C6C66900086DC28 /* FlickrConstants.swift */,

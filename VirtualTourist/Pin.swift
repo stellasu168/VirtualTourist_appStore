@@ -9,14 +9,14 @@ import UIKit
 import MapKit
 import CoreData
 
-class Pin: NSManagedObject, MKAnnotation {
+class Pin: NSManagedObject {
     
     // MARK: - Pin model properties
     
     @NSManaged var latitude: Double
     @NSManaged var longitude: Double
-    @NSManaged var photos: NSMutableOrderedSet
-    @NSManaged var pageNumber: Int
+//    @NSManaged var photos: NSMutableOrderedSet
+//    @NSManaged var pageNumber: Int
     
     var coordinate: CLLocationCoordinate2D {
         
@@ -32,19 +32,21 @@ class Pin: NSManagedObject, MKAnnotation {
     
     // MARK: - Init model
     
-    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+/*    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
+*/    
+    // init(coordinate: CLLocationCoordinate2D, context: NSManagedObjectContext)
     
-    init(coordinate: CLLocationCoordinate2D, context: NSManagedObjectContext) {
+    init(coordinate: CLLocationCoordinate2D) {
         
         // Entity of core data
-        let entity = NSEntityDescription.entityForName("Pin", inManagedObjectContext: context)!
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+//        let entity = NSEntityDescription.entityForName("Pin", inManagedObjectContext: context)!
+//        super.init(entity: entity, insertIntoManagedObjectContext: context)
         
         self.latitude = coordinate.latitude
         self.longitude = coordinate.longitude
-        self.photos = NSMutableOrderedSet()
-        self.pageNumber = 1
+//        self.photos = NSMutableOrderedSet()
+//        self.pageNumber = 1
     }
 }

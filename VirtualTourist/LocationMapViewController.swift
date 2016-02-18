@@ -18,12 +18,13 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var deleteLabel: UILabel!
     @IBOutlet weak var editButton: UINavigationItem!
     
+    var pins = [Pin]()
     var selectedPin: Pin? = nil
     var editingPins: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
         let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
         
         longPressRecogniser.minimumPressDuration = 1.0
@@ -31,10 +32,14 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
         // Set the map view delegate
         mapView.delegate = self
+        
         deleteLabel.hidden = true
         
     }
 
+    override func viewWillAppear(animated: Bool) {
+        
+    }
     
     // I need to push the view up a little bit
     @IBAction func editClicked(sender: AnyObject) {
@@ -54,6 +59,9 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         let annotation = MKPointAnnotation()
         annotation.coordinate = touchMapCoordinate
         
+        let pin = Pin(coordinate: annotation.coordinate)
+
+        // Find out the location name based on the coordinates
         let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
         
         let geoCoder = CLGeocoder()

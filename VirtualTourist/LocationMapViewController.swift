@@ -22,6 +22,11 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     var selectedPin: Pin? = nil
     var editingPins: Bool = false
     
+    
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,9 +46,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
     }
     
-    var sharedContext: NSManagedObjectContext {
-        return CoreDataStackManager.sharedInstance().managedObjectContext
-    }
+
     
     // I need to push the view up a little bit
     @IBAction func editClicked(sender: AnyObject) {
@@ -65,12 +68,12 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
         let pin = Pin(coordinate: annotation.coordinate, context: sharedContext)
 
+        pins.append(pin)
+        
         // Find out the location name based on the coordinates
         let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
         
         let geoCoder = CLGeocoder()
-        var _: AnyObject
-        var _: NSError
         
         geoCoder.reverseGeocodeLocation(coordinates, completionHandler: { (placemark, error) -> Void in
             if error != nil {
@@ -114,7 +117,19 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
             
         }
         
-        let selectedPin = annotation
+        selectedPin = nil
+
+        for pin in pins {
+            
+            if annotation.coordinate.latitude == pin.latitude && annotation.coordinate.longitude == pin.longitude {
+                selectedPin = pin
+
+            }
+        }
+        
+        guard let selectedPin = self.selectedPin else { print("no pin error") ; return }
+        
+        // If it did find it,
         
         print(selectedPin.coordinate.latitude)
         
@@ -137,7 +152,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
  
     
     
-}
+} // End of LocationMapViewController.swift
 
 
 

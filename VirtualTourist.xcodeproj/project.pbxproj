@@ -17,7 +17,6 @@
 		55AA118A1C59850000977620 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55AA11891C59850000977620 /* Assets.xcassets */; };
 		55AA118D1C59850000977620 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55AA118B1C59850000977620 /* LaunchScreen.storyboard */; };
 		55AA11981C59850000977620 /* VirtualTouristUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11971C59850000977620 /* VirtualTouristUITests.swift */; };
-		55AA11A31C59859D00977620 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11A21C59859D00977620 /* Pin.swift */; };
 		55AA11A51C5985D500977620 /* Pictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11A41C5985D500977620 /* Pictures.swift */; };
 		55AA11A71C5A1C8800977620 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55AA11A61C5A1C8800977620 /* MapKit.framework */; };
 		55AA11A91C683AAF00977620 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11A81C683AAF00977620 /* PhotoAlbumViewController.swift */; };
@@ -49,7 +48,6 @@
 		55AA11931C59850000977620 /* VirtualTouristUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VirtualTouristUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55AA11971C59850000977620 /* VirtualTouristUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTouristUITests.swift; sourceTree = "<group>"; };
 		55AA11991C59850000977620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55AA11A21C59859D00977620 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		55AA11A41C5985D500977620 /* Pictures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pictures.swift; sourceTree = "<group>"; };
 		55AA11A61C5A1C8800977620 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		55AA11A81C683AAF00977620 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
@@ -78,7 +76,6 @@
 		550172551C7459270086DC28 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				55AA11A21C59859D00977620 /* Pin.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -254,7 +251,6 @@
 				55AA11801C5984FF00977620 /* AppDelegate.swift in Sources */,
 				55AA11881C59850000977620 /* VirtualTourist.xcdatamodeld in Sources */,
 				550172101C6C74100086DC28 /* FlickrConvenient.swift in Sources */,
-				55AA11A31C59859D00977620 /* Pin.swift in Sources */,
 				55AA11A91C683AAF00977620 /* PhotoAlbumViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

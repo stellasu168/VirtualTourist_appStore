@@ -32,17 +32,15 @@ class Pin: NSManagedObject {
     
     // MARK: - Init model
     
-/*    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
-*/    
-    // init(coordinate: CLLocationCoordinate2D, context: NSManagedObjectContext)
     
-    init(coordinate: CLLocationCoordinate2D) {
+    init(coordinate: CLLocationCoordinate2D, context: NSManagedObjectContext) {
         
         // Entity of core data
-//        let entity = NSEntityDescription.entityForName("Pin", inManagedObjectContext: context)!
-//        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        let entity = NSEntityDescription.entityForName("Pin", inManagedObjectContext: context)!
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
         
         self.latitude = coordinate.latitude
         self.longitude = coordinate.longitude

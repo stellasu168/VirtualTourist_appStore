@@ -41,6 +41,10 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
     }
     
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }
+    
     // I need to push the view up a little bit
     @IBAction func editClicked(sender: AnyObject) {
         deleteLabel.hidden = false
@@ -59,7 +63,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         let annotation = MKPointAnnotation()
         annotation.coordinate = touchMapCoordinate
         
-        let pin = Pin(coordinate: annotation.coordinate)
+        let pin = Pin(coordinate: annotation.coordinate, context: sharedContext)
 
         // Find out the location name based on the coordinates
         let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
@@ -111,6 +115,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         }
         
         let selectedPin = annotation
+        
         print(selectedPin.coordinate.latitude)
         
         // Move to the Phone Album View Controller

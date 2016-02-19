@@ -7,7 +7,20 @@
 //
 
 import UIKit
+import Foundation
+import CoreData
 
-class CoreDataStackManager: NSObject {
+private let SQLITE_FILE_NAME = "VirtualTourist.sqlite"
+
+class CoreDataStackManager {
+    
+    // Shared Instance
+    class func sharedInstance() -> CoreDataStackManager {
+        struct Static {
+            static let instance = CoreDataStackManager()
+        }
+        return Static.instance
+    }
+    
 
 }

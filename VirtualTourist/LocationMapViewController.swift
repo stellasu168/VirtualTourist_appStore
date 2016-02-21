@@ -78,7 +78,8 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         annotation.coordinate = touchMapCoordinate
         
         let pin = Pin(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, context: sharedContext)
-
+        CoreDataStackManager.sharedInstance().saveContext()
+        
         pins.append(pin)
         
         // Find out the location name based on the coordinates

@@ -22,9 +22,20 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     var selectedPin: Pin? = nil
     var editingPins: Bool = false
     
-    
+    // Core Data
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext
+    }
+    
+    func fetchAllPins() -> [Pin] {
+        let fetchRequest = NSFetchRequest(entityName: "Pin")
+        
+        do {
+            return try sharedContext.executeFetchRequest(fetchRequest) as! [Pin]
+        } catch {
+            print("error in fetch")
+            return [Pin]()
+        }
     }
     
     override func viewDidLoad() {
@@ -66,7 +77,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         let annotation = MKPointAnnotation()
         annotation.coordinate = touchMapCoordinate
         
-        let pin = Pin(coordinate: annotation.coordinate, context: sharedContext)
+        let pin = Pin(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, context: sharedContext)
 
         pins.append(pin)
         
@@ -122,7 +133,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         for pin in pins {
             
             if annotation.coordinate.latitude == pin.latitude && annotation.coordinate.longitude == pin.longitude {
-                selectedPin = pin
+            selectedPin = pin
 
             }
         }
@@ -131,7 +142,8 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
         // If it did find it,
         
-        print(selectedPin.coordinate.latitude)
+        print(selectedPin.longitude)
+        print(selectedPin.latitude)
         
         // Move to the Phone Album View Controller
         self.performSegueWithIdentifier("PhotoAlbum", sender: nil)
@@ -141,7 +153,6 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "PhotoAlbum") {
             let viewController = segue.destinationViewController as! PhotoAlbumViewController
-            print(selectedPin?.coordinate.latitude)
             viewController.pin = selectedPin
         
         }

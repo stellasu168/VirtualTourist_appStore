@@ -10,6 +10,10 @@
 		5501720C1C6C66900086DC28 /* FlickrConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5501720B1C6C66900086DC28 /* FlickrConstants.swift */; };
 		550172101C6C74100086DC28 /* FlickrConvenient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5501720F1C6C74100086DC28 /* FlickrConvenient.swift */; };
 		550172541C71BC310086DC28 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550172531C71BC310086DC28 /* CoreDataStackManager.swift */; };
+		550172671C790A080086DC28 /* Photos+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550172631C790A080086DC28 /* Photos+CoreDataProperties.swift */; };
+		550172681C790A080086DC28 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550172641C790A080086DC28 /* Photos.swift */; };
+		550172691C790A080086DC28 /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550172651C790A080086DC28 /* Pin+CoreDataProperties.swift */; };
+		5501726A1C790A080086DC28 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550172661C790A080086DC28 /* Pin.swift */; };
 		55AA11801C5984FF00977620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA117F1C5984FF00977620 /* AppDelegate.swift */; };
 		55AA11821C5984FF00977620 /* LocationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11811C5984FF00977620 /* LocationMapViewController.swift */; };
 		55AA11851C5984FF00977620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55AA11831C5984FF00977620 /* Main.storyboard */; };
@@ -37,6 +41,10 @@
 		5501720B1C6C66900086DC28 /* FlickrConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrConstants.swift; sourceTree = "<group>"; };
 		5501720F1C6C74100086DC28 /* FlickrConvenient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrConvenient.swift; sourceTree = "<group>"; };
 		550172531C71BC310086DC28 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
+		550172631C790A080086DC28 /* Photos+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photos+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		550172641C790A080086DC28 /* Photos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
+		550172651C790A080086DC28 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		550172661C790A080086DC28 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		55AA117C1C5984FF00977620 /* VirtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55AA117F1C5984FF00977620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55AA11811C5984FF00977620 /* LocationMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +132,10 @@
 				55AA118B1C59850000977620 /* LaunchScreen.storyboard */,
 				55AA118E1C59850000977620 /* Info.plist */,
 				55AA11861C5984FF00977620 /* VirtualTourist.xcdatamodeld */,
+				550172631C790A080086DC28 /* Photos+CoreDataProperties.swift */,
+				550172641C790A080086DC28 /* Photos.swift */,
+				550172651C790A080086DC28 /* Pin+CoreDataProperties.swift */,
+				550172661C790A080086DC28 /* Pin.swift */,
 			);
 			path = VirtualTourist;
 			sourceTree = "<group>";
@@ -244,11 +256,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				5501720C1C6C66900086DC28 /* FlickrConstants.swift in Sources */,
+				550172691C790A080086DC28 /* Pin+CoreDataProperties.swift in Sources */,
 				55AA11821C5984FF00977620 /* LocationMapViewController.swift in Sources */,
 				55AA11A51C5985D500977620 /* Pictures.swift in Sources */,
 				550172541C71BC310086DC28 /* CoreDataStackManager.swift in Sources */,
 				55AA11AB1C69DA7700977620 /* FlickrClient.swift in Sources */,
+				5501726A1C790A080086DC28 /* Pin.swift in Sources */,
+				550172681C790A080086DC28 /* Photos.swift in Sources */,
 				55AA11801C5984FF00977620 /* AppDelegate.swift in Sources */,
+				550172671C790A080086DC28 /* Photos+CoreDataProperties.swift in Sources */,
 				55AA11881C59850000977620 /* VirtualTourist.xcdatamodeld in Sources */,
 				550172101C6C74100086DC28 /* FlickrConvenient.swift in Sources */,
 				55AA11A91C683AAF00977620 /* PhotoAlbumViewController.swift in Sources */,
@@ -380,10 +396,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = VirtualTourist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.millionstarsllC.VirtualTourist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -391,6 +409,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = VirtualTourist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.millionstarsllC.VirtualTourist;

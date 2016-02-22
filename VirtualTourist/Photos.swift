@@ -19,7 +19,7 @@ class Photos: NSManagedObject {
 
     init(url: String, context: NSManagedObjectContext){
         
-        let entity = NSEntityDescription.entityForName("Photo", inManagedObjectContext: context)!
+        let entity = NSEntityDescription.entityForName("Photos", inManagedObjectContext: context)!
         super.init(entity: entity, insertIntoManagedObjectContext: context)
         self.url = url
         

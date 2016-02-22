@@ -39,23 +39,30 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        print(pin?.latitude)
         
         loadMapView()
+        
         // Set the delegate to this view controller
         fetchedResultsController.delegate = self
     }
 
+    // Reference: http://studyswift.blogspot.com/2014/09/mkpointannotation-put-pin-on-map.html
     func loadMapView() {
-        let point = CLLocationCoordinate2D(latitude: (pin?.latitude)!, longitude: (pin?.longitude)!)
-        let adjustedRegion = MKCoordinateRegionMakeWithDistance(point, 15000, 15000)
-        mapView.setRegion(adjustedRegion, animated: true)
-        let annotation = MKPointAnnotation()
-        mapView.addAnnotation(annotation)
+
+        let point = MKPointAnnotation()
+        
+        point.coordinate = CLLocationCoordinate2DMake((pin?.latitude)!, (pin?.longitude)!)
+        point.title = "Test1"
+        point.subtitle = "Test2"
+        mapView.addAnnotation(point)
+        mapView.centerCoordinate = point.coordinate
+        
+        //Span of the map
+        mapView.setRegion(MKCoordinateRegionMake(point.coordinate, MKCoordinateSpanMake(7,7)), animated: true)
 
     }
     
 
 
-}
+} // The end
 

@@ -17,9 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6Zf-yI-Tbd">
-                                <rect key="frame" x="0.0" y="20" width="320" height="187"/>
-                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bB-ms-375">
                                 <rect key="frame" x="0.0" y="529" width="320" height="39"/>
                                 <state key="normal" title="New Collection"/>
@@ -44,10 +41,18 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6Zf-yI-Tbd">
+                                <rect key="frame" x="0.0" y="38" width="320" height="169"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZQB-i5-C0p"/>
+                    <connections>
+                        <outlet property="collectionView" destination="KCV-bn-Hzx" id="n5c-Dc-d5I"/>
+                        <outlet property="mapView" destination="6Zf-yI-Tbd" id="0dh-a3-bry"/>
+                        <outlet property="newCollectionButton" destination="2bB-ms-375" id="1DE-Zw-kfv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hYF-Yz-XSg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -110,7 +115,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jod-R9-nAG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-377" y="-17"/>
+            <point key="canvasLocation" x="-287" y="297"/>
         </scene>
     </scenes>
 </document>

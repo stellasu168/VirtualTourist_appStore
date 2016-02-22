@@ -48,7 +48,6 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
         // Set the map view delegate
         mapView.delegate = self
-        
         deleteLabel.hidden = true
         
     }

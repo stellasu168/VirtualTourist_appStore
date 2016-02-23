@@ -12,16 +12,17 @@ import CoreData
 @objc(Photos)
 class Photos: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
+    // MARK: - Init model
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
 
-    init(url: String, context: NSManagedObjectContext){
+    init(photoURL: String, pin: Pin, context: NSManagedObjectContext){
         
         let entity = NSEntityDescription.entityForName("Photos", inManagedObjectContext: context)!
         super.init(entity: entity, insertIntoManagedObjectContext: context)
-        self.url = url
+        self.url = photoURL
+        self.pin = pin
         
     }
     

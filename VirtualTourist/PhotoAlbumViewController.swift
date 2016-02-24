@@ -26,12 +26,13 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     // Mark: - Fetched Results Controller
     lazy var fetchedResultsController: NSFetchedResultsController = {
         
-        //Create fetch request for photos which match the sent Pin.
+        // Create fetch request for photos which match the sent Pin.
         let fetchRequest = NSFetchRequest(entityName: "Photos")
+        
         fetchRequest.predicate = NSPredicate(format: "pin == %@", self.pin!)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         
-        //Create fetched results controller with the new fetch request.
+        // Create fetched results controller with the new fetch request.
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
         
         return fetchedResultsController
@@ -46,21 +47,17 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         // Load the map
         loadMapView()
         
-        // Set the delegate to this view controller
-        fetchedResultsController.delegate = self
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        // Initial fetch
-        var error: NSError?
+        // Perform the fetch
         
         do {
             try fetchedResultsController.performFetch()
-        } catch let error1 as NSError {
-            
-            error = error1
-        }
+        } catch {}
+        
+        // Set the delegate to this view controller
+        fetchedResultsController.delegate = self
         
     }
 

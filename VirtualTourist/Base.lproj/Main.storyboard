@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Photo Album View-->
@@ -17,14 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6Zf-yI-Tbd">
-                                <rect key="frame" x="0.0" y="38" width="320" height="169"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6Zf-yI-Tbd">
+                                <rect key="frame" x="0.0" y="64" width="320" height="143"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bB-ms-375">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bB-ms-375">
                                 <rect key="frame" x="0.0" y="529" width="320" height="39"/>
                                 <state key="normal" title="New Collection"/>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KCV-bn-Hzx">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KCV-bn-Hzx">
                                 <rect key="frame" x="0.0" y="205" width="320" height="325"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="G3R-k3-igT">
                                     <size key="itemSize" width="92" height="81"/>
@@ -58,6 +59,16 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6Zf-yI-Tbd" firstAttribute="top" secondItem="DeR-ac-ljr" secondAttribute="bottom" id="0u5-84-hM4"/>
+                            <constraint firstItem="KCV-bn-Hzx" firstAttribute="leading" secondItem="ywK-h6-LM0" secondAttribute="leadingMargin" constant="-20" id="5Vl-Ax-IdB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6Zf-yI-Tbd" secondAttribute="trailing" constant="-20" id="QhE-5i-w2K"/>
+                            <constraint firstItem="KCV-bn-Hzx" firstAttribute="top" secondItem="DeR-ac-ljr" secondAttribute="bottom" constant="141" id="UQo-AD-Wz2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KCV-bn-Hzx" secondAttribute="trailing" constant="-20" id="UzI-zg-JVg"/>
+                            <constraint firstItem="2bB-ms-375" firstAttribute="top" secondItem="6Zf-yI-Tbd" secondAttribute="bottom" constant="322" id="m2Q-TB-Qyg"/>
+                            <constraint firstItem="6Zf-yI-Tbd" firstAttribute="leading" secondItem="ywK-h6-LM0" secondAttribute="leadingMargin" constant="-20" id="uvj-Lw-Ede"/>
+                            <constraint firstItem="pF7-CE-wZn" firstAttribute="top" secondItem="KCV-bn-Hzx" secondAttribute="bottom" constant="38" id="zOM-ww-eSO"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ZQB-i5-C0p"/>
                     <connections>
@@ -89,11 +100,17 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bk4-s1-Skg">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bk4-s1-Skg">
                                 <rect key="frame" x="0.0" y="64" width="320" height="464"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="bk4-s1-Skg" secondAttribute="trailing" constant="-20" id="99X-Sd-hha"/>
+                            <constraint firstItem="bk4-s1-Skg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Pfi-FS-ORB"/>
+                            <constraint firstItem="bk4-s1-Skg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="boE-a4-GFG"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bk4-s1-Skg" secondAttribute="bottom" constant="40" id="vtO-Cz-UJa"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Virtual Tourist" id="kyB-5d-8IE">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="gLK-Sr-Lqs">

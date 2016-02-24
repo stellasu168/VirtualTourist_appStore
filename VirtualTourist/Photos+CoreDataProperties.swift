@@ -11,6 +11,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 extension Photos {
 
@@ -18,5 +19,5 @@ extension Photos {
     @NSManaged var id: String?
     @NSManaged var filePath: String?
     @NSManaged var pin: Pin?
-
+    
 }

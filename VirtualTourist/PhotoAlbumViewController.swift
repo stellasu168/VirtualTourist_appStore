@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate {
+class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var pin: Pin? = nil
     
@@ -19,18 +19,21 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Core Data Convenience
-    
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }
     
     // Mark: - Fetched Results Controller
     lazy var fetchedResultsController: NSFetchedResultsController = {
+        
+        //Create fetch request for photos which match the sent Pin.
         let fetchRequest = NSFetchRequest(entityName: "Photos")
         fetchRequest.predicate = NSPredicate(format: "pin == %@", self.pin!)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         
+        //Create fetched results controller with the new fetch request.
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
+        
         return fetchedResultsController
     }()
     
@@ -40,10 +43,25 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         super.viewDidLoad()
         mapView.delegate = self
         
+        // Load the map
         loadMapView()
         
         // Set the delegate to this view controller
         fetchedResultsController.delegate = self
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        // Initial fetch
+        var error: NSError?
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error1 as NSError {
+            
+            error = error1
+        }
+        
     }
 
     // Reference: http://studyswift.blogspot.com/2014/09/mkpointannotation-put-pin-on-map.html
@@ -63,6 +81,31 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     }
     
 
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+            let sectionInfo = self.fetchedResultsController.sections![section]
+            return sectionInfo.numberOfObjects
+    }
+    
+    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCollectionViewCell", forIndexPath: indexPath) as! PhotoCollectionViewCell
+        let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
+
+        cell.photoView.image = photo.image
+        
+        return cell
+    }
+
+
+    
+    
+    
+    
+    
+    
+    
+    
 
 } // The end
 

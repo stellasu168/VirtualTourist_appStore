@@ -81,6 +81,8 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
         pins.append(pin)
         
+        FlickrClient.sharedInstance().downloadPhotosForPin(pin) { (success, error) in print("\(success) - \(error)") }
+        
         // Find out the location name based on the coordinates
         let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
         

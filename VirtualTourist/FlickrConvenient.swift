@@ -63,6 +63,10 @@ extension FlickrClient {
                             self.downloadPhotoImage(newPhoto, completionHandler: {
                                 success, error in
                                 
+                                print("\(success): \(error)")
+                                
+                                NSNotificationCenter.defaultCenter().postNotificationName("downloadPhotoImage.done", object: nil)
+                                
                                 //Save the context
                                 dispatch_async(dispatch_get_main_queue(), {
                                     CoreDataStackManager.sharedInstance().saveContext()

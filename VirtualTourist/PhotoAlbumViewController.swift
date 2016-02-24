@@ -51,16 +51,25 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         collectionView.dataSource = self
         
         // Perform the fetch
-        
         do {
             try fetchedResultsController.performFetch()
-        } catch {}
+        } catch let error as NSError {
+            print("\(error)")
+        }
         
         // Set the delegate to this view controller
         fetchedResultsController.delegate = self
         
+        // Subscirbe to notification
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "photoReload:", name: "downloadPhotoImage.done", object: nil)
     }
 
+    func photoReload(notification: NSNotification)
+    {
+        
+        collectionView.reloadData()
+    }
+    
     // Reference: http://studyswift.blogspot.com/2014/09/mkpointannotation-put-pin-on-map.html
     func loadMapView() {
 
@@ -80,6 +89,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
             let sectionInfo = self.fetchedResultsController.sections![section]
+            print("\(sectionInfo.numberOfObjects)")
             return sectionInfo.numberOfObjects
     }
     

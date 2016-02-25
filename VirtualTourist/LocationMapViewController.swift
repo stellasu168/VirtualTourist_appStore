@@ -60,8 +60,6 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
 
         // show the Done button
         
-        // Delete a pressed pin
-        
         // I need to push the view up a little bit
 
     
@@ -83,6 +81,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
         pins.append(pin)
         
+        // Downloading photos
         FlickrClient.sharedInstance().downloadPhotosForPin(pin) { (success, error) in print("\(success) - \(error)") }
         
         // Find out the location name based on the coordinates
@@ -121,18 +120,20 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         
         mapView.deselectAnnotation(view.annotation, animated: true)
-        
         guard let annotation = view.annotation else { /* no annotation */ return }
-        mapView.deselectAnnotation(annotation, animated: true)
+        
+        let title = annotation.title!
+        selectedPin = nil
         
         for pin in pins {
             
             if annotation.coordinate.latitude == pin.latitude && annotation.coordinate.longitude == pin.longitude {
+                
                 selectedPin = pin
                 
-                if editingPins == true {
+                if editingPins {
                     
-                    print("Ready to delete pin")
+                    print("Deleting pin - verify core data is deleting as well")
                     sharedContext.deleteObject(selectedPin!)
                     self.mapView.removeAnnotation(annotation)
                     
@@ -142,12 +143,11 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
                     
                     if title != nil {
                         pin.pinTitle = title!
+                        
                     } else {
                         pin.pinTitle = "This pin has no name"
-                        }
+                    }
                     
-                    //guard let selectedPin = self.selectedPin else { print("no pin error") ; return }
-                
                     // Move to the Phone Album View Controller
                     self.performSegueWithIdentifier("PhotoAlbum", sender: nil)
 

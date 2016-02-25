@@ -127,7 +127,6 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         mapView.deselectAnnotation(annotation, animated: true)
         if title != nil {
             print(title!)
-            
         }
         
         selectedPin = nil
@@ -135,9 +134,13 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         for pin in pins {
             
             if annotation.coordinate.latitude == pin.latitude && annotation.coordinate.longitude == pin.longitude {
-            selectedPin = pin
-            pin.pinTitle = title!
-
+                selectedPin = pin
+                
+                if title != nil {
+                    pin.pinTitle = title!
+                } else {
+                    pin.pinTitle = "This pin has no name"
+                }
             }
         }
         

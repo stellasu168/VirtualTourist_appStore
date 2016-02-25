@@ -17,6 +17,8 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var newCollectionButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var noImagesLabel: UILabel!
+    
     
     // MARK: - Core Data Convenience
     var sharedContext: NSManagedObjectContext {
@@ -42,6 +44,10 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        newCollectionButton.hidden = false
+        noImagesLabel.hidden = true
+        
         mapView.delegate = self
         
         // Load the map
@@ -79,7 +85,8 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         mapView.centerCoordinate = point.coordinate
         
         //Span of the map
-        mapView.setRegion(MKCoordinateRegionMake(point.coordinate, MKCoordinateSpanMake(7,7)), animated: true)
+        //mapView.setRegion(MKCoordinateRegionMake(point.coordinate, MKCoordinateSpanMake(7,7)), animated: true)
+        mapView.selectAnnotation(point, animated: true)
 
     }
     
@@ -87,6 +94,12 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
             let sectionInfo = self.fetchedResultsController.sections![section]
             print("\(sectionInfo.numberOfObjects)")
+        
+        if sectionInfo.numberOfObjects == 0 {
+            noImagesLabel.hidden = false
+            newCollectionButton.hidden = true
+        }
+        
             return sectionInfo.numberOfObjects
     }
     

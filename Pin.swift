@@ -12,6 +12,7 @@ import CoreData
 @objc(Pin)
 class Pin: NSManagedObject {
     
+    
     // In Swift, superclass initializers are not available to subclasses, so it is necessary to include this initializer and call the superclass' implementation of it.
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)

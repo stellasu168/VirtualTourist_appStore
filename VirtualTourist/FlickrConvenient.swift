@@ -23,7 +23,7 @@ extension FlickrClient {
             
         }
         
-        //Parameters for request photos
+        // Parameters for request photos
         let parameters: [String : AnyObject] = [
             URLKeys.Method : Methods.Search,
             URLKeys.APIKey : Constants.APIKey,
@@ -36,7 +36,7 @@ extension FlickrClient {
             URLKeys.PerPage : 21
         ]
         
-        //Make GET request for get photos for pin
+        // Make GET request for get photos for pin
         taskForGETMethodWithParameters(parameters, completionHandler: {
             results, error in
             
@@ -44,30 +44,31 @@ extension FlickrClient {
                 completionHandler(success: false, error: error)
             } else {
                 
-                //response dictionary
+                // Response dictionary
                 if let photosDictionary = results.valueForKey(JSONResponseKeys.Photos) as? [String: AnyObject],
                     photosArray = photosDictionary[JSONResponseKeys.Photo] as? [[String : AnyObject]],
                     numberOfPhotoPages = photosDictionary[JSONResponseKeys.Pages]     as? Int {
                         
                         pin.pageNumber = numberOfPhotoPages
                         
-                        //dictionary with photos
+                        // Dictionary with photos
                         for photoDictionary in photosArray {
                             
                             let photoURLString = photoDictionary[URLValues.URLMediumPhoto] as! String
                             
-                            //create Photo model
+                            // Create the Photos model
                             let newPhoto = Photos(photoURL: photoURLString, pin: pin, context: self.sharedContext)
                             
-                            //download photo by url
+                            // Download photo by url
                             self.downloadPhotoImage(newPhoto, completionHandler: {
                                 success, error in
                                 
                                 print("\(success): \(error)")
                                 
+                                // Posting NSNotifications
                                 NSNotificationCenter.defaultCenter().postNotificationName("downloadPhotoImage.done", object: nil)
                                 
-                                //Save the context
+                                // Save the context
                                 dispatch_async(dispatch_get_main_queue(), {
                                     CoreDataStackManager.sharedInstance().saveContext()
                                 })
@@ -83,12 +84,12 @@ extension FlickrClient {
         })
     }
     
-    // download, save image and change file path for photo
+    // Download save image and change file path for photo
     func downloadPhotoImage(photo: Photos, completionHandler: (success: Bool, error: NSError?) -> Void) {
         
         let imageURLString = photo.url
         
-        //Make GET request for download photo by url
+        // Make GET request for download photo by url
         taskForGETMethod(imageURLString!, completionHandler: {
             result, error in
             
@@ -102,16 +103,16 @@ extension FlickrClient {
                 
                 if let result = result {
                     
-                    //get file name and file url
+                    // Get file name and file url
                     let fileName = (imageURLString! as NSString).lastPathComponent
                     let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
                     let pathArray = [dirPath, fileName]
                     let fileURL = NSURL.fileURLWithPathComponents(pathArray)!
                     
-                    //save file
+                    // Save file
                     NSFileManager.defaultManager().createFileAtPath(fileURL.path!, contents: result, attributes: nil)
                     
-                    //update the Photo model
+                    // Update the Photos model
                     photo.filePath = fileURL.path
                     
                     completionHandler(success: true, error: nil)

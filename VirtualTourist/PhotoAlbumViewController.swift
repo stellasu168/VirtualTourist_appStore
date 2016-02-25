@@ -60,13 +60,11 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         // Set the delegate to this view controller
         fetchedResultsController.delegate = self
         
-        // Subscirbe to notification
+        // Subscirbe to notification so photos can be reloaded
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "photoReload:", name: "downloadPhotoImage.done", object: nil)
     }
 
-    func photoReload(notification: NSNotification)
-    {
-        
+    func photoReload(notification: NSNotification) {
         collectionView.reloadData()
     }
     
@@ -76,8 +74,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         let point = MKPointAnnotation()
         
         point.coordinate = CLLocationCoordinate2DMake((pin?.latitude)!, (pin?.longitude)!)
-        point.title = "Test1"
-        point.subtitle = "Test2"
+        point.title = pin?.pinTitle
         mapView.addAnnotation(point)
         mapView.centerCoordinate = point.coordinate
         

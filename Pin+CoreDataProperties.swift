@@ -18,5 +18,7 @@ extension Pin {
     @NSManaged var latitude: Double
     @NSManaged var pageNumber: NSNumber?
     @NSManaged var photos: NSSet?
+    @NSManaged var pinTitle: String?
+
 
 }

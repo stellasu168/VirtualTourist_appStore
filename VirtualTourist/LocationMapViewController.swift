@@ -136,6 +136,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
             
             if annotation.coordinate.latitude == pin.latitude && annotation.coordinate.longitude == pin.longitude {
             selectedPin = pin
+            pin.pinTitle = title!
 
             }
         }

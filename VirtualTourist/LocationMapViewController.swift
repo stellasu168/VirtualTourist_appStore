@@ -122,52 +122,38 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
         mapView.deselectAnnotation(view.annotation, animated: true)
         
-        if editingPins == true {
-            
-            
-            print("Ready to delete pin")
-            
-            
-           if let currentPin = view.annotation as? Pin {
-                sharedContext.deleteObject(currentPin)
-                mapView.removeAnnotation(view.annotation!)
-            
-                CoreDataStackManager.sharedInstance().saveContext()
-            }
-            
-            
-      }
+        guard let annotation = view.annotation else { /* no annotation */ return }
+        mapView.deselectAnnotation(annotation, animated: true)
         
-        else {
-        
-            // do other things when pin is selected
-            guard let annotation = view.annotation else { /* no annotation */ return }
+        for pin in pins {
             
-            let title = annotation.title!
-            mapView.deselectAnnotation(annotation, animated: true)
-        
-            selectedPin = nil
-
-            for pin in pins {
-            
-                if annotation.coordinate.latitude == pin.latitude && annotation.coordinate.longitude == pin.longitude {
-                    selectedPin = pin
+            if annotation.coordinate.latitude == pin.latitude && annotation.coordinate.longitude == pin.longitude {
+                selectedPin = pin
                 
+                if editingPins == true {
+                    
+                    print("Ready to delete pin")
+                    sharedContext.deleteObject(selectedPin!)
+                    self.mapView.removeAnnotation(annotation)
+                    
+                    CoreDataStackManager.sharedInstance().saveContext()
+                    
+                } else {
+                    
                     if title != nil {
                         pin.pinTitle = title!
                     } else {
                         pin.pinTitle = "This pin has no name"
+                        }
+                    
+                    //guard let selectedPin = self.selectedPin else { print("no pin error") ; return }
+                
+                    // Move to the Phone Album View Controller
+                    self.performSegueWithIdentifier("PhotoAlbum", sender: nil)
+
                     }
-                }
             }
-        
-          //  guard let selectedPin = self.selectedPin else { print("no pin error") ; return }
-        
-            // Move to the Phone Album View Controller
-            self.performSegueWithIdentifier("PhotoAlbum", sender: nil)
-            
         }
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -115,6 +115,12 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     }
 
 
+    @IBAction func newCollectionButtonTapped(sender: AnyObject) {
+        
+        // Get a new set of photos
+        
+        
+    }
     
     
     

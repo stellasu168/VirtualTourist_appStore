@@ -11,6 +11,7 @@ import CoreData
 
 extension FlickrClient {
     
+    // Initiates a download from Flickr
     func downloadPhotosForPin(pin: Pin, completionHandler: (success: Bool, error: NSError?) -> Void) {
         
         // Init randomPage variable

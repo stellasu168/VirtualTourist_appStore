@@ -14,7 +14,7 @@ extension FlickrClient {
     struct Constants {
         
         //API Key
-        static let APIKey = "329b2b318d8527cccca01bea57b88e8e"
+        static let APIKey = "37fa54a6d3c2bec4c5d66165d1ca18f5"
         
         //base URL
         static let BaseURL = "https://api.flickr.com/services/rest/"

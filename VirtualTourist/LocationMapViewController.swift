@@ -5,7 +5,7 @@
 //  Created by Stella Su on 1/27/16.
 //  Copyright © 2016 Million Stars, LLC. All rights reserved.
 //
-// If the app is turned off, the map should return to the same state when it is turned on again.
+//  *If the app is turned off, the map should return to the same state when it is turned on again.
 
 import UIKit
 import MapKit
@@ -51,17 +51,19 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         deleteLabel.hidden = true
         
     }
-
-    override func viewWillAppear(animated: Bool) {
-        
-    }
     
 
-    
-    // I need to push the view up a little bit
     @IBAction func editClicked(sender: AnyObject) {
+        
         deleteLabel.hidden = false
         editingPins = true
+
+        // show the Done button
+        
+        // Delete a pressed pin
+        
+        // I need to push the view up a little bit
+
     
     }
 
@@ -120,39 +122,51 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
         mapView.deselectAnnotation(view.annotation, animated: true)
         
-        // do other things when pin is selected
-        guard let annotation = view.annotation else { /* no annotation */ return }
-        
-        let title = annotation.title!
-        mapView.deselectAnnotation(annotation, animated: true)
-        if title != nil {
-            print(title!)
-        }
-        
-        selectedPin = nil
-
-        for pin in pins {
+        if editingPins == true {
             
-            if annotation.coordinate.latitude == pin.latitude && annotation.coordinate.longitude == pin.longitude {
-                selectedPin = pin
+            
+            print("Ready to delete pin")
+            
+            
+           if let currentPin = view.annotation as? Pin {
+                sharedContext.deleteObject(currentPin)
+                mapView.removeAnnotation(view.annotation!)
+            
+                CoreDataStackManager.sharedInstance().saveContext()
+            }
+            
+            
+      }
+        
+        else {
+        
+            // do other things when pin is selected
+            guard let annotation = view.annotation else { /* no annotation */ return }
+            
+            let title = annotation.title!
+            mapView.deselectAnnotation(annotation, animated: true)
+        
+            selectedPin = nil
+
+            for pin in pins {
+            
+                if annotation.coordinate.latitude == pin.latitude && annotation.coordinate.longitude == pin.longitude {
+                    selectedPin = pin
                 
-                if title != nil {
-                    pin.pinTitle = title!
-                } else {
-                    pin.pinTitle = "This pin has no name"
+                    if title != nil {
+                        pin.pinTitle = title!
+                    } else {
+                        pin.pinTitle = "This pin has no name"
+                    }
                 }
             }
+        
+          //  guard let selectedPin = self.selectedPin else { print("no pin error") ; return }
+        
+            // Move to the Phone Album View Controller
+            self.performSegueWithIdentifier("PhotoAlbum", sender: nil)
+            
         }
-        
-        guard let selectedPin = self.selectedPin else { print("no pin error") ; return }
-        
-        // If it did find it,
-        
-        print(selectedPin.longitude)
-        print(selectedPin.latitude)
-        
-        // Move to the Phone Album View Controller
-        self.performSegueWithIdentifier("PhotoAlbum", sender: nil)
         
     }
     

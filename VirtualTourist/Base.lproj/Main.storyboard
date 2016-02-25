@@ -64,6 +64,9 @@
                                 <rect key="frame" x="0.0" y="529" width="320" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="New Collection"/>
+                                <connections>
+                                    <action selector="newCollectionButtonTapped:" destination="Uc6-3S-KMZ" eventType="touchUpInside" id="ssH-Qp-zz0"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

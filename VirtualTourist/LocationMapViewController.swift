@@ -53,21 +53,36 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     }
     
 
-    @IBAction func editClicked(sender: AnyObject) {
+    @IBAction func editClicked(sender: UIBarButtonItem) {
+        print("Editing pins is ... \(editingPins)")
         
-        deleteLabel.hidden = false
-        editingPins = true
-
-        // show the Done button
+        if editingPins == false {
+            editingPins = true
+            deleteLabel.hidden = false
+            navigationItem.rightBarButtonItem?.title = "Done"
         
-        // I need to push the view up a little bit
+            print("Now, the editing pins is ... \(editingPins)")
+        }
 
+        else if editingPins {
+   
+            navigationItem.rightBarButtonItem?.title = "Edit"
+            editingPins = false
+            deleteLabel.hidden = true
+
+        }
+
+        // I need to push the view up a little bit?
     
     }
 
     // http://stackoverflow.com/questions/5182082/mkmapview-drop-a-pin-on-touch
     func handleLongPress(getstureRecognizer : UIGestureRecognizer){
         
+        if (editingPins) {
+            // Do something?!
+            return
+        } else {
         if getstureRecognizer.state != .Began { return }
         
         let touchPoint = getstureRecognizer.locationInView(self.mapView)
@@ -105,6 +120,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         })
         
         mapView.addAnnotation(annotation)
+        }
     }
 
     // Pin will transition to the Phone Album View when a pin is tapped

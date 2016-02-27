@@ -8,10 +8,14 @@
 
 import Foundation
 import CoreData
+import MapKit
 
 @objc(Pin)
 class Pin: NSManagedObject {
     
+    var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
     
     // In Swift, superclass initializers are not available to subclasses, so it is necessary to include this initializer and call the superclass' implementation of it.
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {

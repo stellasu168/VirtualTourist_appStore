@@ -50,9 +50,24 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         mapView.delegate = self
         deleteLabel.hidden = true
         
+        addSavedPinsToMap()
     }
     
-
+    func addSavedPinsToMap() {
+        
+        pins = fetchAllPins()
+        print("Pin count is \(pins.count)")
+        
+        for pin in pins {
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = pin.coordinate
+            print(annotation)
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
+    
     @IBAction func editClicked(sender: UIBarButtonItem) {
         print("Editing pins is ... \(editingPins)")
         
@@ -80,9 +95,10 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     func handleLongPress(getstureRecognizer : UIGestureRecognizer){
         
         if (editingPins) {
-            // Do something?!
+            // Do something here?!
             return
         } else {
+            
         if getstureRecognizer.state != .Began { return }
         
         let touchPoint = getstureRecognizer.locationInView(self.mapView)
@@ -91,13 +107,16 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         let annotation = MKPointAnnotation()
         annotation.coordinate = touchMapCoordinate
         
-        let pin = Pin(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, context: sharedContext)
+        let newPin = Pin(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, context: sharedContext)
+            
         CoreDataStackManager.sharedInstance().saveContext()
         
-        pins.append(pin)
+        pins.append(newPin)
+        mapView.addAnnotation(annotation)
+
         
-        // Downloading photos
-        FlickrClient.sharedInstance().downloadPhotosForPin(pin) { (success, error) in print("\(success) - \(error)") }
+        // Downloading photos for new pin
+        FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in print("\(success) - \(error)") }
         
         // Find out the location name based on the coordinates
         let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
@@ -119,7 +138,6 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
             }
         })
         
-        mapView.addAnnotation(annotation)
         }
     }
 
@@ -139,6 +157,8 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         guard let annotation = view.annotation else { /* no annotation */ return }
         
         let title = annotation.title!
+        print(annotation.title)
+        
         selectedPin = nil
         
         for pin in pins {

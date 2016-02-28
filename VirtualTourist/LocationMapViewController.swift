@@ -62,7 +62,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = pin.coordinate
-            //annotation.title = pin.pinTitle
+            annotation.title = pin.pinTitle
             mapView.addAnnotation(annotation)
         }
     }

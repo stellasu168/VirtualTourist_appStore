@@ -56,13 +56,13 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     func addSavedPinsToMap() {
         
         pins = fetchAllPins()
-        print("Pin count is \(pins.count)")
+        print("Pin count in core data is \(pins.count)")
         
         for pin in pins {
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = pin.coordinate
-            print(annotation)
+            //print(annotation)
             mapView.addAnnotation(annotation)
         }
     }
@@ -116,7 +116,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
 
         
         // Downloading photos for new pin
-        FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in print("\(success) - \(error)") }
+        FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in print("downloadPhotosForPin is \(success) - \(error)") }
         
         // Find out the location name based on the coordinates
         let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
@@ -170,9 +170,13 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
                 if editingPins {
                     
                     print("Deleting pin - verify core data is deleting as well")
+                    
                     sharedContext.deleteObject(selectedPin!)
+                    
+                    // Deleting selected pin on map
                     self.mapView.removeAnnotation(annotation)
                     
+                    // Save the chanages
                     CoreDataStackManager.sharedInstance().saveContext()
                     
                 } else {

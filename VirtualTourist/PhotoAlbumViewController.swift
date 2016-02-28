@@ -26,12 +26,16 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     }
     
     // Mark: - Fetched Results Controller
+    // Lazily computed property pointing to the Photo entity objects, sorted by title, predicated on the pin.
     lazy var fetchedResultsController: NSFetchedResultsController = {
         
         // Create fetch request for photos which match the sent Pin.
         let fetchRequest = NSFetchRequest(entityName: "Photos")
         
+        // Limit the fetch request to just those photos related to the Pin.
         fetchRequest.predicate = NSPredicate(format: "pin == %@", self.pin!)
+        
+        // Sort the fetch request by title, ascending.
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         
         // Create fetched results controller with the new fetch request.
@@ -72,6 +76,39 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
 
     func photoReload(notification: NSNotification) {
         collectionView.reloadData()
+    }
+    
+    
+    // "new' images might overlap with previous collections of images
+    @IBAction func newCollectionButtonTapped(sender: UIButton) {
+        print("New collection tapped")
+        
+        // ??? Empty the photo album ???
+        for photo in fetchedResultsController.fetchedObjects as! [Photos]{
+            sharedContext.deleteObject(photo)
+        }
+        
+        // Save the chanages to core data
+        CoreDataStackManager.sharedInstance().saveContext()
+        
+        // Download a new set of photos with this pin
+        FlickrClient.sharedInstance().downloadPhotosForPin(pin!, completionHandler: {
+            success, error in
+            
+            if success {
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    CoreDataStackManager.sharedInstance().saveContext()
+                    self.newCollectionButton.hidden = true
+                                        })
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    print("error downloading a new set of photos")
+                    self.newCollectionButton.hidden = false
+                })
+            }
+
+        })
     }
     
     // Reference: http://studyswift.blogspot.com/2014/09/mkpointannotation-put-pin-on-map.html
@@ -115,12 +152,6 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     }
 
 
-    @IBAction func newCollectionButtonTapped(sender: AnyObject) {
-        
-        // Get a new set of photos
-        
-        
-    }
     
     
     

@@ -98,8 +98,8 @@ extension FlickrClient {
             if let error = error {
                 
                 photo.filePath = "error"
-                
                 completionHandler(success: false, error: error)
+                
             } else {
                 
                 if let result = result {
@@ -109,6 +109,7 @@ extension FlickrClient {
                     let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
                     let pathArray = [dirPath, fileName]
                     let fileURL = NSURL.fileURLWithPathComponents(pathArray)!
+                    print(fileURL)
                     
                     // Save file
                     NSFileManager.defaultManager().createFileAtPath(fileURL.path!, contents: result, attributes: nil)

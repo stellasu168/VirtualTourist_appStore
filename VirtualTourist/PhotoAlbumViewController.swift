@@ -74,8 +74,19 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "photoReload:", name: "downloadPhotoImage.done", object: nil)
     }
 
+    // Make sure the closure always runs in the main thread
     func photoReload(notification: NSNotification) {
-        collectionView.reloadData()
+        dispatch_async(dispatch_get_main_queue(), {
+            self.collectionView.reloadData()
+        })
+    }
+    
+    private func reFetch() {
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("\(error)")
+        }
     }
     
     
@@ -90,6 +101,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         // Save the chanages to core data
         CoreDataStackManager.sharedInstance().saveContext()
+        reFetch()
         
         // Download a new set of photos with this pin
         FlickrClient.sharedInstance().downloadPhotosForPin(pin!, completionHandler: {
@@ -99,17 +111,19 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     CoreDataStackManager.sharedInstance().saveContext()
-                    self.newCollectionButton.hidden = true
-                                        })
+                    self.newCollectionButton.hidden = false
+                })
             } else {
                 dispatch_async(dispatch_get_main_queue(), {
                     print("error downloading a new set of photos")
                     self.newCollectionButton.hidden = false
                 })
             }
-
+            self.reFetch()
         })
     }
+    
+
     
     // Reference: http://studyswift.blogspot.com/2014/09/mkpointannotation-put-pin-on-map.html
     func loadMapView() {
@@ -145,6 +159,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCollectionViewCell", forIndexPath: indexPath) as! PhotoCollectionViewCell
         let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
+        print("URL from the collection view is \(photo.url)")
 
         cell.photoView.image = photo.image
         

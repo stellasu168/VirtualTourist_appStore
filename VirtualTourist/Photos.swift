@@ -51,7 +51,23 @@ class Photos: NSManagedObject {
         
     }
     
-
+    //MARK: - Delete file when deleting a managed object
+    override func prepareForDeletion(){
+        //super.prepareForDeletion()
+        
+        // Delete the associated image file when the Photos managed object is deleted.
+        let fileName = (filePath! as NSString).lastPathComponent
+        
+        let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let pathArray = [dirPath, fileName]
+        let fileURL = NSURL.fileURLWithPathComponents(pathArray)!
+        
+        do {
+            try NSFileManager.defaultManager().removeItemAtURL(fileURL)
+        } catch let error as NSError {
+            print("Error from prepareForDeletion - \(error)")
+        }
+    }
     
     
 

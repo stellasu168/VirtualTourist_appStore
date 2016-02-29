@@ -13,7 +13,7 @@ import SystemConfiguration
 
 class FlickrClient: NSObject {
 
-    /* Shared session */
+    // Shared session
     var session: NSURLSession
     
     override init() {

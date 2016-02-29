@@ -80,13 +80,10 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         }
 
         else if editingPins {
-   
             navigationItem.rightBarButtonItem?.title = "Edit"
             editingPins = false
             deleteLabel.hidden = true
-
         }
-
         // I need to push the view up a little bit?
     
     }
@@ -108,14 +105,14 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         annotation.coordinate = touchMapCoordinate
         
         let newPin = Pin(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, context: sharedContext)
-            
+         
+        // Saving to core data
         CoreDataStackManager.sharedInstance().saveContext()
         
         pins.append(newPin)
         mapView.addAnnotation(annotation)
 
-        
-        // Downloading photos for new pin
+        // Downloading photos for new pin (only downloading if it's a new pin)
         FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in print("downloadPhotosForPin is \(success) - \(error)") }
         
         // Find out the location name based on the coordinates
@@ -170,13 +167,12 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
                 if editingPins {
                     
                     print("Deleting pin - verify core data is deleting as well")
-                    
                     sharedContext.deleteObject(selectedPin!)
                     
                     // Deleting selected pin on map
                     self.mapView.removeAnnotation(annotation)
                     
-                    // Save the chanages
+                    // Save the chanages to core data
                     CoreDataStackManager.sharedInstance().saveContext()
                     
                 } else {
@@ -187,10 +183,8 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
                     } else {
                         pin.pinTitle = "This pin has no name"
                     }
-                    
                     // Move to the Phone Album View Controller
                     self.performSegueWithIdentifier("PhotoAlbum", sender: nil)
-
                     }
             }
         }
@@ -200,14 +194,8 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         if (segue.identifier == "PhotoAlbum") {
             let viewController = segue.destinationViewController as! PhotoAlbumViewController
             viewController.pin = selectedPin
-        
         }
-        
     }
-
-
- 
-
     
     
 } // End of LocationMapViewController.swift

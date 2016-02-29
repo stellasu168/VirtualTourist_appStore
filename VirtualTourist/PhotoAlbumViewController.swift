@@ -26,6 +26,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     }
     
     // Mark: - Fetched Results Controller
+    
     // Lazily computed property pointing to the Photo entity objects, sorted by title, predicated on the pin.
     lazy var fetchedResultsController: NSFetchedResultsController = {
         
@@ -94,7 +95,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     @IBAction func newCollectionButtonTapped(sender: UIButton) {
         print("New collection tapped")
         
-        // ??? Empty the photo album ???
+        // Empty the photo album
         for photo in fetchedResultsController.fetchedObjects as! [Photos]{
             sharedContext.deleteObject(photo)
         }
@@ -123,7 +124,6 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         })
     }
     
-
     
     // Reference: http://studyswift.blogspot.com/2014/09/mkpointannotation-put-pin-on-map.html
     func loadMapView() {
@@ -144,7 +144,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
             let sectionInfo = self.fetchedResultsController.sections![section]
-            print("\(sectionInfo.numberOfObjects)")
+            print("Number of photos returned --\(sectionInfo.numberOfObjects)")
         
         if sectionInfo.numberOfObjects == 0 {
             noImagesLabel.hidden = false
@@ -152,6 +152,25 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         }
         
             return sectionInfo.numberOfObjects
+    }
+    
+    // Remove photos from an album when user select a cell or select multiple cells
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
+        
+        // Should the "remove selected pictures' label
+        
+        // Get photo associated with the indexPath.
+        let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
+        print("Cell selected is \(photo)")
+        
+        // Remove the photo
+        sharedContext.deleteObject(photo)
+        CoreDataStackManager.sharedInstance().saveContext()
+        
+        // Update selected cell
+        reFetch()
+        collectionView.reloadData()
+        
     }
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:

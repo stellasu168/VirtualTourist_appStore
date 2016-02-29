@@ -32,7 +32,6 @@ class Photos: NSManagedObject {
             return UIImage(contentsOfFile: fileURL.path!)
         }
         return nil
-
         
     }
 
@@ -52,9 +51,12 @@ class Photos: NSManagedObject {
     }
     
     //MARK: - Delete file when deleting a managed object
+    
+    // Explicitely deletes the underlying files
     override func prepareForDeletion(){
-        //super.prepareForDeletion()
+        super.prepareForDeletion()
         
+        if filePath != nil{
         // Delete the associated image file when the Photos managed object is deleted.
         let fileName = (filePath! as NSString).lastPathComponent
         
@@ -63,12 +65,12 @@ class Photos: NSManagedObject {
         let fileURL = NSURL.fileURLWithPathComponents(pathArray)!
         
         do {
-            try NSFileManager.defaultManager().removeItemAtURL(fileURL)
-        } catch let error as NSError {
-            print("Error from prepareForDeletion - \(error)")
-        }
+                    try NSFileManager.defaultManager().removeItemAtURL(fileURL)
+                } catch let error as NSError {
+                    print("Error from prepareForDeletion - \(error)")
+                }
+        } else { print("filepath is empty")}
     }
-    
     
 
 }

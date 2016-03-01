@@ -86,7 +86,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         do {
             try fetchedResultsController.performFetch()
         } catch let error as NSError {
-            print("\(error)")
+            print("reFetch - \(error)")
         }
     }
     
@@ -144,7 +144,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
             let sectionInfo = self.fetchedResultsController.sections![section]
-            print("Number of photos returned --\(sectionInfo.numberOfObjects)")
+            print("Number of photos returned -- \(sectionInfo.numberOfObjects)")
         
         if sectionInfo.numberOfObjects == 0 {
             noImagesLabel.hidden = false

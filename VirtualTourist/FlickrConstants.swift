@@ -10,22 +10,22 @@ import UIKit
 
 extension FlickrClient {
     
-    //MARK: - Constants
+    // MARK: - Constants
     struct Constants {
         
-        //API Key
+        // API Key 37fa54a6d3c2bec4c5d66165d1ca18f5
         static let APIKey = "37fa54a6d3c2bec4c5d66165d1ca18f5"
         
-        //base URL
+        // Base URL
         static let BaseURL = "https://api.flickr.com/services/rest/"
     }
     
-    //MARK: - Methods
+    // MARK: - Methods
     struct Methods {
         static let Search = "flickr.photos.search"
     }
     
-    //MARK: - URL Keys
+    // MARK: - URL Keys
     struct URLKeys {
         static let APIKey = "api_key"
         static let BoundingBox = "bbox"
@@ -39,13 +39,13 @@ extension FlickrClient {
         static let PerPage = "per_page"
     }
     
-    //MARK: - URL Values
+    // MARK: - URL Values
     struct URLValues {
         static let JSONFormat = "json"
         static let URLMediumPhoto = "url_m"
     }
     
-    //MARK: - JSON Response Keys
+    // MARK: - JSON Response Keys
     struct JSONResponseKeys {
         static let Status = "stat"
         static let Code = "code"
@@ -55,7 +55,7 @@ extension FlickrClient {
         static let Photo = "photo"
     }
     
-    //MARK: - JSON Response Values
+    // MARK: - JSON Response Values
     
     struct JSONResponseValues {
         

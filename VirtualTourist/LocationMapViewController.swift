@@ -20,6 +20,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     
     var pins = [Pin]()
     var selectedPin: Pin? = nil
+    // Flag for whether it's in editing mode
     var editingPins: Bool = false
     
     // Core Data
@@ -28,8 +29,11 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func fetchAllPins() -> [Pin] {
+        
+        // Create the fetch request
         let fetchRequest = NSFetchRequest(entityName: "Pin")
         
+        // Execute the fetch request
         do {
             return try sharedContext.executeFetchRequest(fetchRequest) as! [Pin]
         } catch {
@@ -53,6 +57,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         addSavedPinsToMap()
     }
     
+    // Find all the saved pins and show it on the mapView
     func addSavedPinsToMap() {
         
         pins = fetchAllPins()
@@ -67,7 +72,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    
+    // When the edit button is clicked, show the 'Done' button and flag the editingPins to true
     @IBAction func editClicked(sender: UIBarButtonItem) {
         print("Editing pins is ... \(editingPins)")
         
@@ -88,9 +93,11 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     
     }
 
-    // http://stackoverflow.com/questions/5182082/mkmapview-drop-a-pin-on-touch
+    // Pressing and holding a point on the map creates a new Pin object and adds it to the map
+    // Reference: http://stackoverflow.com/questions/5182082/mkmapview-drop-a-pin-on-touch
     func handleLongPress(getstureRecognizer : UIGestureRecognizer){
         
+        // If it's in editing mode, do nothing
         if (editingPins) {
             // Do something here?!
             return
@@ -109,10 +116,13 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         // Saving to core data
         CoreDataStackManager.sharedInstance().saveContext()
         
+        // Adding the newPin to the pins array
         pins.append(newPin)
+            
+        // Adding the newPin to the map
         mapView.addAnnotation(annotation)
 
-        // Downloading photos for new pin (only downloading if it's a new pin)
+        // Downloading photos for new pin (only download it if it's a new pin)
         FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in print("downloadPhotosForPin is \(success) - \(error)") }
         
         // Find out the location name based on the coordinates
@@ -128,17 +138,19 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
             if placemark!.count > 0 {
                 let pm = placemark![0] as CLPlacemark
                 if (pm.locality != nil) && (pm.country != nil) {
+                    // Assigning the city and country to the annotation's title
                     annotation.title = "\(pm.locality!), \(pm.country!)"
                 }
             } else {
-                print("Error with data")
-            }
-        })
+                print("Error with placemark")
+                }
+            })
         
         }
     }
 
-    // Pin will transition to the Phone Album View when a pin is tapped
+    // Mark: - When a pin is tapped, it will transition to the Phone Album View Controller
+    
     // Start by updating the view for the annotation. This is necessary because it allows you to intercept taps on the annotation's view (the pin).
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")

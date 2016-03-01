@@ -18,10 +18,8 @@ extension FlickrClient {
         var randomPageNumber: Int = 1
         
         if let pageNumber = pin.pageNumber {
-            
             let pageNumberInt = pageNumber as Int
             randomPageNumber = Int((arc4random_uniform(UInt32(pageNumberInt)))) + 1
-            
         }
         
         // Parameters for request photos
@@ -48,7 +46,7 @@ extension FlickrClient {
                 // Response dictionary
                 if let photosDictionary = results.valueForKey(JSONResponseKeys.Photos) as? [String: AnyObject],
                     photosArray = photosDictionary[JSONResponseKeys.Photo] as? [[String : AnyObject]],
-                    numberOfPhotoPages = photosDictionary[JSONResponseKeys.Pages]     as? Int {
+                    numberOfPhotoPages = photosDictionary[JSONResponseKeys.Pages] as? Int {
                         
                         pin.pageNumber = numberOfPhotoPages
                         
@@ -64,7 +62,7 @@ extension FlickrClient {
                             self.downloadPhotoImage(newPhoto, completionHandler: {
                                 success, error in
                                 
-                                print("\(success): \(error)")
+                                print("Downloading photo by URL - \(success): \(error)")
                                 
                                 // Posting NSNotifications
                                 NSNotificationCenter.defaultCenter().postNotificationName("downloadPhotoImage.done", object: nil)
@@ -94,9 +92,9 @@ extension FlickrClient {
         taskForGETMethod(imageURLString!, completionHandler: {
             result, error in
             
-            //if error - set file path to error for show blank image
+            // If there is an error - set file path to error to show blank image
             if let error = error {
-                
+                print("Error from downloading images \(error.localizedDescription )")
                 photo.filePath = "error"
                 completionHandler(success: false, error: error)
                 

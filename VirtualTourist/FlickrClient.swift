@@ -26,7 +26,7 @@ class FlickrClient: NSObject {
     func taskForGETMethodWithParameters(parameters: [String : AnyObject],
         completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
             
-            // Set the URL and URL request
+            // Build the URL and configure the request
             let urlString = Constants.BaseURL + FlickrClient.escapedParameters(parameters)
             let request = NSMutableURLRequest(URL: NSURL(string: urlString)!)
             
@@ -43,9 +43,11 @@ class FlickrClient: NSObject {
                 }
             }
             
+            // Start the request
             task.resume()
     }
     
+    // MARK: POST
     func taskForGETMethod(urlString: String,
         completionHandler: (result: NSData?, error: NSError?) -> Void) {
             
@@ -66,12 +68,13 @@ class FlickrClient: NSObject {
                 }
             }
             
+            // Start the request
             task.resume()
     }
     
     // MARK: - Helpers
     
-    //  Helper: Substitute the key for the value that is contained within the method name */
+    // Substitute the key for the value that is contained within the method name
     class func subtituteKeyInMethod(method: String, key: String, value: String) -> String? {
         if method.rangeOfString("{\(key)}") != nil {
             return method.stringByReplacingOccurrencesOfString("{\(key)}", withString: value)
@@ -80,45 +83,46 @@ class FlickrClient: NSObject {
         }
     }
     
-    // Helper: Given raw JSON, return a usable Foundation object */
+    // Given raw JSON, return a usable Foundation object
     class func parseJSONWithCompletionHandler(data: NSData, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         
         var parsingError: NSError?
         let parsedResult: AnyObject?
+        
         do {
             parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
         } catch let error as NSError {
             parsingError = error
             parsedResult = nil
+            print("Parse error - \(parsingError!.localizedDescription)")
+            return
         }
         
         if let error = parsingError {
-            
             completionHandler(result: nil, error: error)
         } else {
-            
             completionHandler(result: parsedResult, error: nil)
         }
+        
     }
     
     
-    /* Helper function: Given a dictionary of parameters, convert to a string for a url */
+    // Given a dictionary of parameters, convert to a string for a url
     class func escapedParameters(parameters: [String : AnyObject]) -> String {
         
         var urlVars = [String]()
         
         for (key, value) in parameters {
             if(!key.isEmpty) {
-                /* Make sure that it is a string value */
+                // Make sure that it is a string value
                 let stringValue = "\(value)"
                 
-                /* Escape it */
+                // Escape it
                 let escapedValue = stringValue.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
                 
-                /* Append it */
+                // Append it
                 urlVars += [key + "=" + "\(escapedValue!)"]
             }
-            
             
         }
         
@@ -145,6 +149,7 @@ class FlickrClient: NSObject {
     }
     
     // MARK: - Show error alert
+    
     func showAlert(message: NSError, viewController: AnyObject) {
         let errMessage = message.localizedDescription
         

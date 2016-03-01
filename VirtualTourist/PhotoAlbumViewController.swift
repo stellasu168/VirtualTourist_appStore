@@ -19,6 +19,8 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noImagesLabel: UILabel!
     
+    // collection - array of IndexPath
+    var selectedIndexofCollectionViewCells = [NSIndexPath]()
     
     // MARK: - Core Data Convenience
     var sharedContext: NSManagedObjectContext {
@@ -157,19 +159,28 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     // Remove photos from an album when user select a cell or select multiple cells
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         
-        // Should the "remove selected pictures' label
+        // Whenever user selects any collection view item
+        if let index = selectedIndexofCollectionViewCells.indexOf(indexPath){
+            selectedIndexofCollectionViewCells.removeAtIndex(index)
+        } else {
+            selectedIndexofCollectionViewCells.append(indexPath)
+        }
+        
+        // Configure the UI of the collection item
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
+        cell.deleteLabel.hidden = false
         
         // Get photo associated with the indexPath.
         let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
         print("Cell selected is \(photo)")
         
         // Remove the photo
-        sharedContext.deleteObject(photo)
+        //sharedContext.deleteObject(photo)
         CoreDataStackManager.sharedInstance().saveContext()
         
         // Update selected cell
-        reFetch()
-        collectionView.reloadData()
+        //reFetch()
+        //collectionView.reloadData()
         
     }
     
@@ -181,6 +192,13 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         print("URL from the collection view is \(photo.url)")
 
         cell.photoView.image = photo.image
+        
+        // First time we don't show
+        cell.deleteLabel.hidden = true
+        // set delete or configure UI
+        
+        // 1. Put a button in collection view cell
+        // 2.
         
         return cell
     }

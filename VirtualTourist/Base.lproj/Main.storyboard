@@ -50,8 +50,14 @@
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="XQx-fg-63n">
                                                     <rect key="frame" x="45" y="41" width="20" height="20"/>
                                                 </activityIndicatorView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OlW-X6-uqM">
-                                                    <rect key="frame" x="0.0" y="1" width="103" height="93"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Delete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Dx-KQ-UeT">
+                                                    <rect key="frame" x="25" y="72" width="55" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OlW-X6-uqM">
+                                                    <rect key="frame" x="0.0" y="0.0" width="103" height="93"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -66,6 +72,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="activityIndicator" destination="XQx-fg-63n" id="9sY-EM-Zmv"/>
+                                            <outlet property="deleteLabel" destination="3Dx-KQ-UeT" id="RFf-Kg-wUp"/>
                                             <outlet property="photoView" destination="OlW-X6-uqM" id="LrU-Cx-3hY"/>
                                         </connections>
                                     </collectionViewCell>

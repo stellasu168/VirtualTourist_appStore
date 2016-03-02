@@ -48,40 +48,38 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="XQx-fg-63n">
-                                                    <rect key="frame" x="45" y="41" width="20" height="20"/>
+                                                    <rect key="frame" x="41" y="41" width="20" height="20"/>
                                                 </activityIndicatorView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Delete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Dx-KQ-UeT">
-                                                    <rect key="frame" x="25" y="72" width="55" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OlW-X6-uqM">
                                                     <rect key="frame" x="0.0" y="0.0" width="103" height="93"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVq-U7-hVE">
+                                                    <rect key="frame" x="28" y="34" width="47" height="26"/>
+                                                    <state key="normal" image="remove image"/>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="OlW-X6-uqM" firstAttribute="leading" secondItem="7Xv-g5-efi" secondAttribute="leadingMargin" constant="-8" id="Dfr-xb-Piz"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="OlW-X6-uqM" secondAttribute="bottom" constant="-8" id="LvA-5Z-2ep"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="OlW-X6-uqM" secondAttribute="trailing" constant="-9" id="Pjh-4W-obH"/>
-                                            <constraint firstItem="XQx-fg-63n" firstAttribute="leading" secondItem="7Xv-g5-efi" secondAttribute="leadingMargin" constant="37" id="kot-jB-neE"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="OlW-X6-uqM" secondAttribute="trailing" constant="-8" id="Pjh-4W-obH"/>
+                                            <constraint firstItem="XQx-fg-63n" firstAttribute="leading" secondItem="7Xv-g5-efi" secondAttribute="leadingMargin" constant="33" id="kot-jB-neE"/>
                                             <constraint firstItem="XQx-fg-63n" firstAttribute="top" secondItem="7Xv-g5-efi" secondAttribute="topMargin" constant="33" id="ot7-2n-LZV"/>
-                                            <constraint firstItem="OlW-X6-uqM" firstAttribute="top" secondItem="7Xv-g5-efi" secondAttribute="topMargin" constant="-7" id="yHr-Ii-gsp"/>
+                                            <constraint firstItem="OlW-X6-uqM" firstAttribute="top" secondItem="7Xv-g5-efi" secondAttribute="topMargin" constant="-8" id="yHr-Ii-gsp"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="activityIndicator" destination="XQx-fg-63n" id="9sY-EM-Zmv"/>
-                                            <outlet property="deleteLabel" destination="3Dx-KQ-UeT" id="RFf-Kg-wUp"/>
+                                            <outlet property="deleteButton" destination="EVq-U7-hVE" id="NQa-KA-9js"/>
                                             <outlet property="photoView" destination="OlW-X6-uqM" id="LrU-Cx-3hY"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bB-ms-375">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bB-ms-375">
+                                <rect key="frame" x="0.0" y="530" width="320" height="37"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="jJR-Yr-CSw"/>
+                                    <constraint firstAttribute="height" constant="37" id="jJR-Yr-CSw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="New Collection"/>
@@ -129,11 +127,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bk4-s1-Skg">
-                                <rect key="frame" x="-2" y="64" width="324" height="484"/>
+                                <rect key="frame" x="-2" y="64" width="324" height="467"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap Pins to Delete" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BvQ-F9-lGE">
-                                <rect key="frame" x="-2" y="547" width="324" height="21"/>
+                                <rect key="frame" x="-2" y="531" width="324" height="37"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="EFc-NI-Eut"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -141,11 +142,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="BvQ-F9-lGE" firstAttribute="top" secondItem="bk4-s1-Skg" secondAttribute="bottom" id="2LH-xA-0o6"/>
                             <constraint firstItem="BvQ-F9-lGE" firstAttribute="trailing" secondItem="bk4-s1-Skg" secondAttribute="trailing" id="5VC-KC-Or5"/>
                             <constraint firstItem="bk4-s1-Skg" firstAttribute="leading" secondItem="BvQ-F9-lGE" secondAttribute="leading" id="9An-AR-Jck"/>
                             <constraint firstItem="bk4-s1-Skg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-18" id="BJB-oX-Kut"/>
                             <constraint firstItem="BvQ-F9-lGE" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Kcl-2d-hWX"/>
-                            <constraint firstAttribute="bottom" secondItem="bk4-s1-Skg" secondAttribute="bottom" constant="20" symbolic="YES" id="R3M-4G-O2f"/>
                             <constraint firstItem="bk4-s1-Skg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bWS-Fj-Fuf"/>
                             <constraint firstItem="bk4-s1-Skg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="boE-a4-GFG"/>
                         </constraints>
@@ -185,4 +186,7 @@
             <point key="canvasLocation" x="-287" y="297"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="remove image" width="20" height="20"/>
+    </resources>
 </document>

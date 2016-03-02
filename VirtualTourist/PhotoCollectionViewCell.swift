@@ -13,7 +13,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var photoView: UIImageView!
     // Outlet for label
-    @IBOutlet weak var deleteLabel: UILabel!
+    
+    @IBOutlet weak var deleteButton: UIButton!
     
     override func prepareForReuse() {
         

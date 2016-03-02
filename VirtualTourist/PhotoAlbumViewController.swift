@@ -97,6 +97,24 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     @IBAction func newCollectionButtonTapped(sender: UIButton) {
         print("New collection tapped")
         
+        if newCollectionButton.titleLabel!.text == "Delete all"
+        {
+            
+            //delete all
+            // Get photo associated with the indexPath.
+            //let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
+            //print("Cell selected is \(photo)")
+            
+            // Remove the photo
+            //sharedContext.deleteObject(photo)
+            //CoreDataStackManager.sharedInstance().saveContext()
+            
+            // Update selected cell
+            //reFetch()
+            //collectionView.reloadData()
+            return
+        }
+        
         // Empty the photo album
         for photo in fetchedResultsController.fetchedObjects as! [Photos]{
             sharedContext.deleteObject(photo)
@@ -160,27 +178,33 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         
         // Whenever user selects any collection view item
+        // Configure the UI of the collection item
+
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
+        
+        // When user deselected it
         if let index = selectedIndexofCollectionViewCells.indexOf(indexPath){
             selectedIndexofCollectionViewCells.removeAtIndex(index)
+            cell.deleteButton.hidden = true
+
         } else {
             selectedIndexofCollectionViewCells.append(indexPath)
+            cell.deleteButton.hidden = false
+            newCollectionButton.titleLabel?.text = "Delete all"
+            
+            // Get photo associated with the indexPath.
+            //let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
+            //print("Cell selected is \(photo)")
+            
+            // Remove the photo
+            //sharedContext.deleteObject(photo)
+            //CoreDataStackManager.sharedInstance().saveContext()
+            
+            // Update selected cell
+            //reFetch()
+            //collectionView.reloadData()
         }
         
-        // Configure the UI of the collection item
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
-        cell.deleteLabel.hidden = false
-        
-        // Get photo associated with the indexPath.
-        let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
-        print("Cell selected is \(photo)")
-        
-        // Remove the photo
-        //sharedContext.deleteObject(photo)
-        CoreDataStackManager.sharedInstance().saveContext()
-        
-        // Update selected cell
-        //reFetch()
-        //collectionView.reloadData()
         
     }
     
@@ -194,7 +218,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         cell.photoView.image = photo.image
         
         // First time we don't show
-        cell.deleteLabel.hidden = true
+        cell.deleteButton.hidden = true
         // set delete or configure UI
         
         // 1. Put a button in collection view cell

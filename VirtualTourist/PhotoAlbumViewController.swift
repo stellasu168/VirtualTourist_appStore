@@ -95,25 +95,37 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     
     // "new' images might overlap with previous collections of images
     @IBAction func newCollectionButtonTapped(sender: UIButton) {
-        print("New collection tapped")
         
+        //delete all
         if newCollectionButton.titleLabel!.text == "Delete all"
         {
             
-            //delete all
+            print("Delete all tapped")
+            
+            for indexPath in selectedIndexofCollectionViewCells {
+            
             // Get photo associated with the indexPath.
-            //let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
-            //print("Cell selected is \(photo)")
+            let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
+            
             
             // Remove the photo
-            //sharedContext.deleteObject(photo)
-            //CoreDataStackManager.sharedInstance().saveContext()
+            sharedContext.deleteObject(photo)
             
+
+            }
+            
+            CoreDataStackManager.sharedInstance().saveContext()
+            newCollectionButton.setTitle("New Collection", forState: UIControlState.Normal)
+
             // Update selected cell
-            //reFetch()
-            //collectionView.reloadData()
+            reFetch()
+            collectionView.reloadData()
+            
             return
         }
+        
+        
+        print("New collection tapped")
         
         // Empty the photo album
         for photo in fetchedResultsController.fetchedObjects as! [Photos]{
@@ -184,25 +196,23 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         // When user deselected it
         if let index = selectedIndexofCollectionViewCells.indexOf(indexPath){
+            
             selectedIndexofCollectionViewCells.removeAtIndex(index)
             cell.deleteButton.hidden = true
 
         } else {
             selectedIndexofCollectionViewCells.append(indexPath)
             cell.deleteButton.hidden = false
-            newCollectionButton.titleLabel?.text = "Delete all photos"
             
-            // Get photo associated with the indexPath.
-            //let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
-            //print("Cell selected is \(photo)")
-            
-            // Remove the photo
-            //sharedContext.deleteObject(photo)
-            //CoreDataStackManager.sharedInstance().saveContext()
-            
-            // Update selected cell
-            //reFetch()
-            //collectionView.reloadData()
+        }
+        
+        if selectedIndexofCollectionViewCells.count > 0 {
+            print(selectedIndexofCollectionViewCells.count)
+            newCollectionButton.setTitle("Delete all", forState: UIControlState.Normal)
+        } else{
+            print("the count in the else loop\(selectedIndexofCollectionViewCells.count)")
+            newCollectionButton.setTitle("New Collection", forState: UIControlState.Normal)
+
         }
         
         
@@ -219,7 +229,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         // First time we are not sure show
         cell.deleteButton.hidden = true
-        cell.deleteButton.layer.setValue(indexPath.row, forKey: "index")
+        cell.deleteButton.layer.setValue(indexPath, forKey: "indexPath")
         cell.deleteButton.addTarget(self, action: "deletePhoto:", forControlEvents: UIControlEvents.TouchUpInside)
         
         // set delete or configure UI
@@ -235,12 +245,15 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         // I need to know if the cell is selected
         let indexOfTheItem = sender.layer.valueForKey("indexPath") as! NSIndexPath
-        
-        print(indexOfTheItem)
 
         // Get photo associated with the indexPath.
         let photo = fetchedResultsController.objectAtIndexPath(indexOfTheItem) as! Photos
         print("Cell selected is \(photo)")
+        
+        // When user deselected it
+        if let index = selectedIndexofCollectionViewCells.indexOf(indexOfTheItem){
+            selectedIndexofCollectionViewCells.removeAtIndex(index)
+        }
         
         // Remove the photo
         sharedContext.deleteObject(photo)
@@ -249,6 +262,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         // Update selected cell
         reFetch()
         collectionView.reloadData()
+        
         
     }
     

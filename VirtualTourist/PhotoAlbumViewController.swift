@@ -19,17 +19,18 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noImagesLabel: UILabel!
     
-    // collection - array of IndexPath
+    // Array of IndexPath - keeping track of index of selected cells
     var selectedIndexofCollectionViewCells = [NSIndexPath]()
     
     // MARK: - Core Data Convenience
+    
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }
     
     // Mark: - Fetched Results Controller
     
-    // Lazily computed property pointing to the Photo entity objects, sorted by title, predicated on the pin.
+    // Lazily computed property pointing to the Photos entity objects, sorted by title, predicated on the pin.
     lazy var fetchedResultsController: NSFetchedResultsController = {
         
         // Create fetch request for photos which match the sent Pin.
@@ -77,7 +78,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "photoReload:", name: "downloadPhotoImage.done", object: nil)
     }
 
-    // Make sure the closure always runs in the main thread
+    // Inserting dispatch_async to ensure the closure always runs in the main thread
     func photoReload(notification: NSNotification) {
         dispatch_async(dispatch_get_main_queue(), {
             self.collectionView.reloadData()
@@ -93,10 +94,10 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     }
     
     
-    // "new' images might overlap with previous collections of images
+    // Note: "new' images might overlap with previous collections of images
     @IBAction func newCollectionButtonTapped(sender: UIButton) {
         
-        // If the button changed is "Delete all"
+        // If the button changed to "Delete all", delete the photo
         if newCollectionButton.titleLabel!.text == "Delete all"
         {
             // Removing the photo that user selected one by one
@@ -150,6 +151,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
                     self.newCollectionButton.hidden = false
                     })
                 }
+                // Update cells
                 self.reFetch()
                 self.collectionView.reloadData()
 
@@ -157,7 +159,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         }
     }
     
-    
+    // Load map view for the current pin
     // Reference: http://studyswift.blogspot.com/2014/09/mkpointannotation-put-pin-on-map.html
     func loadMapView() {
 
@@ -168,53 +170,49 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         mapView.addAnnotation(point)
         mapView.centerCoordinate = point.coordinate
         
-        //Span of the map
-        //mapView.setRegion(MKCoordinateRegionMake(point.coordinate, MKCoordinateSpanMake(7,7)), animated: true)
+        // Select the annotation so the title can be shown
         mapView.selectAnnotation(point, animated: true)
 
     }
     
-
+    // Return the number of photos from fetchedResultsController
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
             let sectionInfo = self.fetchedResultsController.sections![section]
-            print("Number of photos returned -- \(sectionInfo.numberOfObjects)")
+            print("Number of photos returned from fetchedResultsController -- \(sectionInfo.numberOfObjects)")
         
         if sectionInfo.numberOfObjects == 0 {
             noImagesLabel.hidden = false
             newCollectionButton.hidden = true
         }
         
-            return sectionInfo.numberOfObjects
+        return sectionInfo.numberOfObjects
     }
     
-    // Remove photos from an album when user select a cell or select multiple cells
+    // Remove photos from an album when user select a cell or multiple cells
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         
-        // Whenever user selects any collection view item
         // Configure the UI of the collection item
-        
-        print("In the beginning of didSelectItemAtIndexPath \(selectedIndexofCollectionViewCells.count)")
-        
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
         
-        // When user deselected it
+        // When user deselect the cell, remove it from the selectedIndexofCollectionViewCells array
         if let index = selectedIndexofCollectionViewCells.indexOf(indexPath){
             selectedIndexofCollectionViewCells.removeAtIndex(index)
             // Hide the deleteButton
             cell.deleteButton.hidden = true
         } else {
+            // Else, add it to the selectedIndexofCollectionViewCells array
             selectedIndexofCollectionViewCells.append(indexPath)
             cell.deleteButton.hidden = false
         }
         
+        // If the array is not empty, show the 'Delete all' button
         if selectedIndexofCollectionViewCells.count > 0 {
             print(selectedIndexofCollectionViewCells.count)
             newCollectionButton.setTitle("Delete all", forState: UIControlState.Normal)
         } else{
-            print("the count in the else loop\(selectedIndexofCollectionViewCells.count)")
+            // Else, show the 'New Collection' button
             newCollectionButton.setTitle("New Collection", forState: UIControlState.Normal)
         }
-        
         
     }
     
@@ -223,44 +221,43 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCollectionViewCell", forIndexPath: indexPath) as! PhotoCollectionViewCell
         let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
-        print("URL from the collection view is \(photo.url)")
+        print("Photo URL from the collection view is \(photo.url)")
 
         cell.photoView.image = photo.image
         
-        // First time we are not sure show
         cell.deleteButton.hidden = true
         cell.deleteButton.layer.setValue(indexPath, forKey: "indexPath")
+        
+        // Trigger the action 'deletePhoto' when the button is tapped
         cell.deleteButton.addTarget(self, action: "deletePhoto:", forControlEvents: UIControlEvents.TouchUpInside)
     
         return cell
     }
 
-
     func deletePhoto(sender: UIButton){
         
-        // I want to know if the cell is selected
+        // I want to know if the cell is selected giving the indexPath
         let indexOfTheItem = sender.layer.valueForKey("indexPath") as! NSIndexPath
 
-        // Get photo associated with the indexPath.
+        // Get the photo associated with the indexPath
         let photo = fetchedResultsController.objectAtIndexPath(indexOfTheItem) as! Photos
         print("Cell selected is \(photo)")
         
-        // When user deselected it
+        // When user deselected it, remove it from the selectedIndexofCollectionViewCells array
         if let index = selectedIndexofCollectionViewCells.indexOf(indexOfTheItem){
             selectedIndexofCollectionViewCells.removeAtIndex(index)
         }
         
         // Remove the photo
         sharedContext.deleteObject(photo)
+        
+        // Save to core data
         CoreDataStackManager.sharedInstance().saveContext()
         
         // Update selected cell
         reFetch()
         collectionView.reloadData()
-        
     }
-    
-    
     
     
 

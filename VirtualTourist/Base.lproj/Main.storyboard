@@ -84,7 +84,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="New Collection"/>
                                 <connections>
-                                    <action selector="newCollectionButtonTapped:" destination="Uc6-3S-KMZ" eventType="touchUpInside" id="ssH-Qp-zz0"/>
+                                    <action selector="bottomButtonTapped:" destination="Uc6-3S-KMZ" eventType="touchUpInside" id="bPt-tM-NRq"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -104,9 +104,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZQB-i5-C0p"/>
                     <connections>
+                        <outlet property="bottomButton" destination="2bB-ms-375" id="TgL-Db-kK4"/>
                         <outlet property="collectionView" destination="KCV-bn-Hzx" id="n5c-Dc-d5I"/>
                         <outlet property="mapView" destination="6Zf-yI-Tbd" id="0dh-a3-bry"/>
-                        <outlet property="newCollectionButton" destination="2bB-ms-375" id="1DE-Zw-kfv"/>
                         <outlet property="noImagesLabel" destination="oDK-cp-KaP" id="ADG-SH-SxT"/>
                     </connections>
                 </viewController>

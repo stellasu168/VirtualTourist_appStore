@@ -99,7 +99,6 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         
         // If it's in editing mode, do nothing
         if (editingPins) {
-            // Do something here?!
             return
         } else {
             
@@ -177,7 +176,6 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
                 selectedPin = pin
                 
                 if editingPins {
-                    
                     print("Deleting pin - verify core data is deleting as well")
                     sharedContext.deleteObject(selectedPin!)
                     

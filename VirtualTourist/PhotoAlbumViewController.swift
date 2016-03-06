@@ -15,7 +15,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     var pin: Pin? = nil
     
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var newCollectionButton: UIButton!
+    @IBOutlet weak var bottomButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noImagesLabel: UILabel!
     
@@ -53,7 +53,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        newCollectionButton.hidden = false
+        bottomButton.hidden = false
         noImagesLabel.hidden = true
         
         mapView.delegate = self
@@ -95,10 +95,10 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     
     
     // Note: "new' images might overlap with previous collections of images
-    @IBAction func newCollectionButtonTapped(sender: UIButton) {
+    @IBAction func bottomButtonTapped(sender: UIButton) {
         
         // If the button changed to "Delete all", delete the photo
-        if newCollectionButton.titleLabel!.text == "Delete all"
+        if bottomButton.titleLabel!.text == "Delete all"
         {
             // Removing the photo that user selected one by one
             for indexPath in selectedIndexofCollectionViewCells {
@@ -122,11 +122,11 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
             collectionView.reloadData()
             
             // Change the button to say 'New Collection' after deletion
-            newCollectionButton.setTitle("New Collection", forState: UIControlState.Normal)
+            bottomButton.setTitle("New Collection", forState: UIControlState.Normal)
 
             return
             
-        } else if newCollectionButton.titleLabel!.text == "New Collection" {
+        } else if bottomButton.titleLabel!.text == "New Collection" {
             
             // 1. Empty the photo album
             for photo in fetchedResultsController.fetchedObjects as! [Photos]{
@@ -143,12 +143,12 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
                 if success {
                     dispatch_async(dispatch_get_main_queue(), {
                     CoreDataStackManager.sharedInstance().saveContext()
-                    self.newCollectionButton.hidden = false
+                    self.bottomButton.hidden = false
                 })
                 } else {
                     dispatch_async(dispatch_get_main_queue(), {
                     print("error downloading a new set of photos")
-                    self.newCollectionButton.hidden = false
+                    self.bottomButton.hidden = false
                     })
                 }
                 // Update cells
@@ -182,7 +182,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         if sectionInfo.numberOfObjects == 0 {
             noImagesLabel.hidden = false
-            newCollectionButton.hidden = true
+            bottomButton.hidden = true
         }
         
         return sectionInfo.numberOfObjects
@@ -208,10 +208,10 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         // If the array is not empty, show the 'Delete all' button
         if selectedIndexofCollectionViewCells.count > 0 {
             print(selectedIndexofCollectionViewCells.count)
-            newCollectionButton.setTitle("Delete all", forState: UIControlState.Normal)
+            bottomButton.setTitle("Delete all", forState: UIControlState.Normal)
         } else{
             // Else, show the 'New Collection' button
-            newCollectionButton.setTitle("New Collection", forState: UIControlState.Normal)
+            bottomButton.setTitle("New Collection", forState: UIControlState.Normal)
         }
         
     }

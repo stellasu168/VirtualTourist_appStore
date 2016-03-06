@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F1605" minimumToolsVersion="Automatic">
+    <entity name="Category" representedClassName=".Category" syncable="YES">
+        <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Photos" representedClassName="Photos" syncable="YES">
         <attribute name="filePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,5 +20,6 @@
     <elements>
         <element name="Photos" positionX="-54" positionY="-9" width="128" height="120"/>
         <element name="Pin" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Category" positionX="-63" positionY="36" width="128" height="60"/>
     </elements>
 </model>

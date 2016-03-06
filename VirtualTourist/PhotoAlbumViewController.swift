@@ -106,6 +106,8 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
                 // Get photo associated with the indexPath.
                 let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
             
+                print("'delete all' deletes this -- \(photo)")
+
                 // Remove the photo
                 sharedContext.deleteObject(photo)
                 
@@ -241,7 +243,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
 
         // Get the photo associated with the indexPath
         let photo = fetchedResultsController.objectAtIndexPath(indexOfTheItem) as! Photos
-        print("Cell selected is \(photo)")
+        print("Delete cell selected from 'deletePhoto' is \(photo)")
         
         // When user deselected it, remove it from the selectedIndexofCollectionViewCells array
         if let index = selectedIndexofCollectionViewCells.indexOf(indexOfTheItem){

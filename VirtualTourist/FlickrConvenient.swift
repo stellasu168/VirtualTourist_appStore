@@ -11,6 +11,7 @@ import CoreData
 
 extension FlickrClient {
     
+    
     // Initiates a download from Flickr
     func downloadPhotosForPin(pin: Pin, completionHandler: (success: Bool, error: NSError?) -> Void) {
         
@@ -50,6 +51,8 @@ extension FlickrClient {
                         
                         pin.pageNumber = numberOfPhotoPages
                         
+                        self.numberOfPhotoDownloaded = photosArray.count
+
                         // Dictionary with photos
                         for photoDictionary in photosArray {
                             
@@ -58,12 +61,14 @@ extension FlickrClient {
                             // Create the Photos model
                             let newPhoto = Photos(photoURL: photoURLString, pin: pin, context: self.sharedContext)
                             
+                            
                             // Download photo by url
                             self.downloadPhotoImage(newPhoto, completionHandler: {
                                 success, error in
                                 
                                 print("Downloading photo by URL - \(success): \(error)")
                                 
+                                self.numberOfPhotoDownloaded--
                                 // Posting NSNotifications
                                 NSNotificationCenter.defaultCenter().postNotificationName("downloadPhotoImage.done", object: nil)
                                 

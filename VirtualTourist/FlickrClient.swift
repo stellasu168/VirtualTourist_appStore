@@ -13,6 +13,8 @@ import SystemConfiguration
 
 class FlickrClient: NSObject {
 
+    var numberOfPhotoDownloaded = 0
+
     // Shared session
     var session: NSURLSession
     

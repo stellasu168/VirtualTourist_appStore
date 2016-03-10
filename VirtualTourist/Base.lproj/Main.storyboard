@@ -187,6 +187,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="remove image" width="20" height="20"/>
+        <image name="remove image" width="15" height="15"/>
     </resources>
 </document>

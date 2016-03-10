@@ -88,6 +88,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
             
             // If no photos remaining, show the 'New Collection' button
             let numberRemaining = FlickrClient.sharedInstance().numberOfPhotoDownloaded
+            print("numberRemaining is \(numberRemaining)")
             if numberRemaining <= 0 {
                 self.bottomButton.hidden = false
             }
@@ -159,7 +160,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
                 if success {
                     dispatch_async(dispatch_get_main_queue(), {
                     CoreDataStackManager.sharedInstance().saveContext()
-                })
+                    })
                 } else {
                     dispatch_async(dispatch_get_main_queue(), {
                     print("error downloading a new set of photos")
@@ -167,8 +168,10 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
                     })
                 }
                 // Update cells
-                self.reFetch()
-                self.collectionView.reloadData()
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.reFetch()
+                    self.collectionView.reloadData()
+                })
 
             })
         }
@@ -217,10 +220,14 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
             cell.deleteButton.hidden = false
         }
         
-        // If the array is not empty, show the 'Delete all' button
+        // If the selectedIndexofCollectionViewCells array is not empty, show the 'Delete all' button
         if selectedIndexofCollectionViewCells.count > 0 {
-            print(selectedIndexofCollectionViewCells.count)
-            bottomButton.setTitle("Delete \(selectedIndexofCollectionViewCells.count) photo", forState: UIControlState.Normal)
+            print("Delete array has \(selectedIndexofCollectionViewCells.count) in it.")
+            if selectedIndexofCollectionViewCells.count == 1{
+                bottomButton.setTitle("Delete \(selectedIndexofCollectionViewCells.count) photo", forState: UIControlState.Normal)
+            } else {
+                bottomButton.setTitle("Delete \(selectedIndexofCollectionViewCells.count) photos", forState: UIControlState.Normal) 
+            }
             isDeleting = true
         } else{
             bottomButton.setTitle("New Collection", forState: UIControlState.Normal)

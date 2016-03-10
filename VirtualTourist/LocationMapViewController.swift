@@ -122,7 +122,7 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         mapView.addAnnotation(annotation)
 
         // Downloading photos for new pin (only download it if it's a new pin)
-        FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in print("downloadPhotosForPin is \(success) - \(error)") }
+        FlickrClient.sharedInstance().downloadPhotosForPin(newPin) { (success, error) in print("downloadPhotosForPin is success:\(success) - error:\(error)") }
         
         // Find out the location name based on the coordinates
         let coordinates = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)

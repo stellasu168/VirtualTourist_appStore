@@ -14,15 +14,11 @@ extension FlickrClient {
     
     // Initiates a download from Flickr
     func downloadPhotosForPin(pin: Pin, completionHandler: (success: Bool, error: NSError?) -> Void) {
-        
-        // Init randomPage variable
+       
         var randomPageNumber: Int = 1
         
-        if let pageNumber = pin.pageNumber {
-            let pageNumberInt = pageNumber as Int
-            randomPageNumber = Int((arc4random_uniform(UInt32(pageNumberInt)))) + 1
-        }
-        
+        randomPageNumber = Int((arc4random_uniform(UInt32(40)))) + 1
+            
         // Parameters for request photos
         let parameters: [String : AnyObject] = [
             URLKeys.Method : Methods.Search,
@@ -66,7 +62,7 @@ extension FlickrClient {
                             self.downloadPhotoImage(newPhoto, completionHandler: {
                                 success, error in
                                 
-                                print("Downloading photo by URL - \(success): \(error)")
+                                //print("Downloading photo by URL - \(success): \(error)")
                                 
                                 self.numberOfPhotoDownloaded--
                                 // Posting NSNotifications
@@ -112,7 +108,7 @@ extension FlickrClient {
                     let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
                     let pathArray = [dirPath, fileName]
                     let fileURL = NSURL.fileURLWithPathComponents(pathArray)!
-                    print(fileURL)
+                    //print(fileURL)
                     
                     // Save file
                     NSFileManager.defaultManager().createFileAtPath(fileURL.path!, contents: result, attributes: nil)

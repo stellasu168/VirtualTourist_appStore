@@ -81,14 +81,14 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "photoReload:", name: "downloadPhotoImage.done", object: nil)
     }
 
-    // Inserting dispatch_async to ensure the closure always runs in the main thread
+    // Inserting dispatch_async to ensure the closure always run in the main thread
     func photoReload(notification: NSNotification) {
         dispatch_async(dispatch_get_main_queue(), {
             self.collectionView.reloadData()
             
             // If no photos remaining, show the 'New Collection' button
             let numberRemaining = FlickrClient.sharedInstance().numberOfPhotoDownloaded
-            print("numberRemaining is \(numberRemaining)")
+            print("numberRemaining is from photoReload \(numberRemaining)")
             if numberRemaining <= 0 {
                 self.bottomButton.hidden = false
             }
@@ -222,11 +222,11 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         // If the selectedIndexofCollectionViewCells array is not empty, show the 'Delete all' button
         if selectedIndexofCollectionViewCells.count > 0 {
-            print("Delete array has \(selectedIndexofCollectionViewCells.count) in it.")
+            print("Delete array has \(selectedIndexofCollectionViewCells.count) photo(s).")
             if selectedIndexofCollectionViewCells.count == 1{
                 bottomButton.setTitle("Delete \(selectedIndexofCollectionViewCells.count) photo", forState: UIControlState.Normal)
             } else {
-                bottomButton.setTitle("Delete \(selectedIndexofCollectionViewCells.count) photos", forState: UIControlState.Normal) 
+                bottomButton.setTitle("Delete \(selectedIndexofCollectionViewCells.count) photos", forState: UIControlState.Normal)
             }
             isDeleting = true
         } else{
@@ -241,7 +241,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCollectionViewCell", forIndexPath: indexPath) as! PhotoCollectionViewCell
         let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
-        print("Photo URL from the collection view is \(photo.url)")
+        //print("Photo URL from the collection view is \(photo.url)")
 
         cell.photoView.image = photo.image
         

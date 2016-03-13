@@ -207,6 +207,19 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    // Change map type (satellite) via segmented control
+    @IBAction func segmentedControlAction(sender: UISegmentedControl) {
+        
+        switch (sender.selectedSegmentIndex) {
+        case 0:
+            mapView.mapType = .Standard
+        case 1:
+            mapView.mapType = .Satellite
+        default:
+            mapView.mapType = .Standard
+        }
+        
+    }
     
 } // End of LocationMapViewController.swift
 

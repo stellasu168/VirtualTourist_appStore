@@ -28,7 +28,7 @@ class Pin: NSManagedObject {
         
         self.latitude = lat
         self.longitude = long
-        
+        self.pageNumber = 0
     }
     
     var sharedContext: NSManagedObjectContext {

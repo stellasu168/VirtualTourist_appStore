@@ -17,8 +17,12 @@ extension FlickrClient {
        
         var randomPageNumber: Int = 1
         
-        randomPageNumber = Int((arc4random_uniform(UInt32(40)))) + 1
-            
+        if let numberPages = pin.pageNumber?.integerValue {
+            if numberPages > 0 {
+                let pageLimit = min(numberPages, 20)
+                randomPageNumber = Int(arc4random_uniform(UInt32(pageLimit))) + 1 }
+        }
+        
         // Parameters for request photos
         let parameters: [String : AnyObject] = [
             URLKeys.Method : Methods.Search,
@@ -52,7 +56,8 @@ extension FlickrClient {
                         // Dictionary with photos
                         for photoDictionary in photosArray {
                             
-                            let photoURLString = photoDictionary[URLValues.URLMediumPhoto] as! String
+                            guard let photoURLString = photoDictionary[URLValues.URLMediumPhoto] as? String else {
+                                print ("error, photoDictionary)"); continue}
                             
                             // Create the Photos model
                             let newPhoto = Photos(photoURL: photoURLString, pin: pin, context: self.sharedContext)

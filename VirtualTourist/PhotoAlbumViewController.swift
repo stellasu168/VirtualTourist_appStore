@@ -145,7 +145,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
             // Else "New Collection" button is tapped
         } else {
             
-            // 1. Empty the photo album
+            // 1. Empty the photo album from the previous set
             for photo in fetchedResultsController.fetchedObjects as! [Photos]{
                 sharedContext.deleteObject(photo)
             }

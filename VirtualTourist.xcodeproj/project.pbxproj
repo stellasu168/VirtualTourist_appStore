@@ -27,6 +27,7 @@
 		55AA11AB1C69DA7700977620 /* FlickrClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AA11AA1C69DA7700977620 /* FlickrClient.swift */; };
 		55F309781C8BBE2E0017521C /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F309761C8BBE2E0017521C /* Category+CoreDataProperties.swift */; };
 		55F309791C8BBE2E0017521C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F309771C8BBE2E0017521C /* Category.swift */; };
+		55F309991C967F640017521C /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F309981C967F640017521C /* ImageScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		55AA11AA1C69DA7700977620 /* FlickrClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrClient.swift; sourceTree = "<group>"; };
 		55F309761C8BBE2E0017521C /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Category+CoreDataProperties.swift"; path = "../Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		55F309771C8BBE2E0017521C /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = ../Category.swift; sourceTree = "<group>"; };
+		55F309981C967F640017521C /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageScrollView.swift; path = ../ImageScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				550172561C7464770086DC28 /* Controller */,
 				550172551C7459270086DC28 /* Model */,
 				55AA117F1C5984FF00977620 /* AppDelegate.swift */,
+				55F309981C967F640017521C /* ImageScrollView.swift */,
 				55AA11AA1C69DA7700977620 /* FlickrClient.swift */,
 				5501720B1C6C66900086DC28 /* FlickrConstants.swift */,
 				5501720F1C6C74100086DC28 /* FlickrConvenient.swift */,
@@ -274,6 +277,7 @@
 				550172671C790A080086DC28 /* Photos+CoreDataProperties.swift in Sources */,
 				55F309791C8BBE2E0017521C /* Category.swift in Sources */,
 				55AA11881C59850000977620 /* VirtualTourist.xcdatamodeld in Sources */,
+				55F309991C967F640017521C /* ImageScrollView.swift in Sources */,
 				550172101C6C74100086DC28 /* FlickrConvenient.swift in Sources */,
 				55AA11A91C683AAF00977620 /* PhotoAlbumViewController.swift in Sources */,
 			);

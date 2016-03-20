@@ -23,6 +23,8 @@ class ImageScrollView: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
      super.viewWillAppear(animated)
+        
+        // ToDo: I should probably list the title of the image
         let imageUrl = NSURL(string:self.selectedImage)
         let imageData = NSData(contentsOfURL: imageUrl!)
         if (imageData != nil)

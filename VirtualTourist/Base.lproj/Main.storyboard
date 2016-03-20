@@ -102,7 +102,9 @@
                             <constraint firstItem="pF7-CE-wZn" firstAttribute="top" secondItem="KCV-bn-Hzx" secondAttribute="bottom" constant="37" id="zOM-ww-eSO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ZQB-i5-C0p"/>
+                    <navigationItem key="navigationItem" id="ZQB-i5-C0p">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="dsW-lI-ZCO"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="bottomButton" destination="2bB-ms-375" id="TgL-Db-kK4"/>
                         <outlet property="collectionView" destination="KCV-bn-Hzx" id="n5c-Dc-d5I"/>

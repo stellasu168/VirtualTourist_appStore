@@ -20,7 +20,8 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     
     var pins = [Pin]()
     var selectedPin: Pin? = nil
-    // Flag for whether it's in editing mode
+    
+    // Flag for editing mode
     var editingPins: Bool = false
     
     // Core Data
@@ -74,14 +75,12 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
     
     // When the edit button is clicked, show the 'Done' button and flag the editingPins to true
     @IBAction func editClicked(sender: UIBarButtonItem) {
-        print("Editing pins is ... \(editingPins)")
         
         if editingPins == false {
             editingPins = true
             deleteLabel.hidden = false
             navigationItem.rightBarButtonItem?.title = "Done"
         
-            print("Now, the editing pins is ... \(editingPins)")
         }
 
         else if editingPins {
@@ -89,7 +88,6 @@ class LocationMapViewController: UIViewController, MKMapViewDelegate {
             editingPins = false
             deleteLabel.hidden = true
         }
-        // I need to push the view up a little bit?
     
     }
 

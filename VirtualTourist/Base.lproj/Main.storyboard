@@ -103,11 +103,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ZQB-i5-C0p">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="dsW-lI-ZCO"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="dsW-lI-ZCO">
+                            <connections>
+                                <action selector="editButtonTapped:" destination="Uc6-3S-KMZ" id="5YX-zz-2fO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bottomButton" destination="2bB-ms-375" id="TgL-Db-kK4"/>
                         <outlet property="collectionView" destination="KCV-bn-Hzx" id="n5c-Dc-d5I"/>
+                        <outlet property="editButton" destination="dsW-lI-ZCO" id="X3i-GA-GXS"/>
                         <outlet property="mapView" destination="6Zf-yI-Tbd" id="0dh-a3-bry"/>
                         <outlet property="noImagesLabel" destination="oDK-cp-KaP" id="ADG-SH-SxT"/>
                     </connections>

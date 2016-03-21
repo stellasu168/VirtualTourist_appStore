@@ -17,10 +17,13 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     // Flag for deleting pictures
     var isDeleting = false
     
+    var editingFlag: Bool = false
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var bottomButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noImagesLabel: UILabel!
+    @IBOutlet weak var editButton: UIBarButtonItem!
     
     // Array of IndexPath - keeping track of index of selected cells
     var selectedIndexofCollectionViewCells = [NSIndexPath]()
@@ -204,13 +207,27 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         return sectionInfo.numberOfObjects
     }
     
+    @IBAction func editButtonTapped(sender: AnyObject) {
+        
+        if editingFlag == false {
+            editingFlag = true
+            //self.navigationItem.rightBarButtonItem?.title = "Done"
+            editButton.title = "Done"
+            print(editingFlag)
+        }
+            
+        else if editingFlag {
+            navigationItem.rightBarButtonItem?.title = "Edit"
+            editingFlag = false
+        }
+        
+    }
     // Remove photos from an album when user select a cell or multiple cells
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         
         //performSegueWithIdentifier("ImageScrollViewSegues", sender: nil)
         let myImageViewPage: ImageScrollView = self.storyboard?.instantiateViewControllerWithIdentifier("ImageScrollView") as! ImageScrollView
-        
-        //let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
+  
         let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
         // Pass the selected image
         myImageViewPage.selectedImage = photo.url!
@@ -218,6 +235,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         self.navigationController?.pushViewController(myImageViewPage, animated: true)
         
 /*
+        // When edit button is tapped, do the following
 
     // Configure the UI of the collection item
         //let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell

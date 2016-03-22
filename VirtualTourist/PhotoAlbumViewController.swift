@@ -211,8 +211,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         if editingFlag == false {
             editingFlag = true
-            //self.navigationItem.rightBarButtonItem?.title = "Done"
-            editButton.title = "Done"
+            navigationItem.rightBarButtonItem?.title = "Done"
             print(editingFlag)
         }
             
@@ -224,7 +223,8 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     }
     // Remove photos from an album when user select a cell or multiple cells
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
-        
+       
+        if editingFlag == false{
         //performSegueWithIdentifier("ImageScrollViewSegues", sender: nil)
         let myImageViewPage: ImageScrollView = self.storyboard?.instantiateViewControllerWithIdentifier("ImageScrollView") as! ImageScrollView
   
@@ -233,12 +233,13 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         myImageViewPage.selectedImage = photo.url!
         
         self.navigationController?.pushViewController(myImageViewPage, animated: true)
-        
-/*
+        }
+
+        else if editingFlag == true {
         // When edit button is tapped, do the following
 
-    // Configure the UI of the collection item
-        //let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
+        // Configure the UI of the collection item
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
         
         // When user deselect the cell, remove it from the selectedIndexofCollectionViewCells array
         if let index = selectedIndexofCollectionViewCells.indexOf(indexPath){
@@ -263,7 +264,8 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
             bottomButton.setTitle("New Collection", forState: UIControlState.Normal)
             isDeleting = false
         }
-*/
+            
+        }
 
     }
     

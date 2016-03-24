@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ico-close-red.png",
+      "filename" : "CloseButton.png",
       "scale" : "1x"
     },
     {

@@ -209,10 +209,12 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     
     @IBAction func editButtonTapped(sender: AnyObject) {
         
+        // If the 'Done' button is tapped:
+        // 1. cancel all the delete stuff
+        
         if editingFlag == false {
             editingFlag = true
             navigationItem.rightBarButtonItem?.title = "Done"
-            print(editingFlag)
         }
             
         else if editingFlag {
@@ -225,31 +227,30 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
        
         if editingFlag == false{
-        //performSegueWithIdentifier("ImageScrollViewSegues", sender: nil)
-        let myImageViewPage: ImageScrollView = self.storyboard?.instantiateViewControllerWithIdentifier("ImageScrollView") as! ImageScrollView
-  
-        let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
-        // Pass the selected image
-        myImageViewPage.selectedImage = photo.url!
+
+            let myImageViewPage: ImageScrollView = self.storyboard?.instantiateViewControllerWithIdentifier("ImageScrollView") as! ImageScrollView
+            let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photos
+            
+            // Pass the selected image
+            myImageViewPage.selectedImage = photo.url!
         
-        self.navigationController?.pushViewController(myImageViewPage, animated: true)
+            self.navigationController?.pushViewController(myImageViewPage, animated: true)
         }
 
-        else if editingFlag == true {
-        // When edit button is tapped, do the following
+        else if (editingFlag) {
 
-        // Configure the UI of the collection item
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
+            // Configure the UI of the collection item
+            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell
         
-        // When user deselect the cell, remove it from the selectedIndexofCollectionViewCells array
-        if let index = selectedIndexofCollectionViewCells.indexOf(indexPath){
-            selectedIndexofCollectionViewCells.removeAtIndex(index)
-            cell.deleteButton.hidden = true
-        } else {
-            // Else, add it to the selectedIndexofCollectionViewCells array
-            selectedIndexofCollectionViewCells.append(indexPath)
-            cell.deleteButton.hidden = false
-        }
+            // When user deselect the cell, remove it from the selectedIndexofCollectionViewCells array
+            if let index = selectedIndexofCollectionViewCells.indexOf(indexPath){
+                selectedIndexofCollectionViewCells.removeAtIndex(index)
+                cell.deleteButton.hidden = true
+            } else {
+                // Else, add it to the selectedIndexofCollectionViewCells array
+                selectedIndexofCollectionViewCells.append(indexPath)
+                cell.deleteButton.hidden = false
+            }
         
         // If the selectedIndexofCollectionViewCells array is not empty, show the 'Delete all' button
         if selectedIndexofCollectionViewCells.count > 0 {
@@ -263,9 +264,9 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         } else{
             bottomButton.setTitle("New Collection", forState: UIControlState.Normal)
             isDeleting = false
-        }
+            }
             
-        }
+        } // End of else if editingFlag = true
 
     }
     

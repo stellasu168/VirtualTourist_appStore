@@ -50,14 +50,14 @@
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="XQx-fg-63n">
                                                     <rect key="frame" x="41" y="41" width="20" height="20"/>
                                                 </activityIndicatorView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OlW-X6-uqM">
+                                                    <rect key="frame" x="0.0" y="0.0" width="102" height="94"/>
+                                                </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVq-U7-hVE">
                                                     <rect key="frame" x="28" y="34" width="47" height="26"/>
                                                     <state key="normal" image="remove image"/>
                                                     <state key="highlighted" image="remove image"/>
                                                 </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OlW-X6-uqM">
-                                                    <rect key="frame" x="0.0" y="0.0" width="102" height="94"/>
-                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>

@@ -209,17 +209,16 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     
     @IBAction func editButtonTapped(sender: AnyObject) {
         
-        // If the 'Done' button is tapped:
-        // 1. cancel all the delete stuff
-        
         if editingFlag == false {
             editingFlag = true
             navigationItem.rightBarButtonItem?.title = "Done"
+            bottomButton.setTitle("Tap photos to delete", forState: UIControlState.Normal)
         }
             
         else if editingFlag {
             navigationItem.rightBarButtonItem?.title = "Edit"
             editingFlag = false
+            bottomButton.hidden = false
         }
         
     }
@@ -250,10 +249,12 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
                 // Else, add it to the selectedIndexofCollectionViewCells array
                 selectedIndexofCollectionViewCells.append(indexPath)
                 cell.deleteButton.hidden = false
+                bottomButton.setTitle("New Collection", forState: UIControlState.Normal)
             }
         
-        // If the selectedIndexofCollectionViewCells array is not empty, show the 'Delete all' button
+        // If the selectedIndexofCollectionViewCells array is not empty, show the 'Delete # photo(s)' button
         if selectedIndexofCollectionViewCells.count > 0 {
+            
             print("Delete array has \(selectedIndexofCollectionViewCells.count) photo(s).")
             if selectedIndexofCollectionViewCells.count == 1{
                 bottomButton.setTitle("Delete \(selectedIndexofCollectionViewCells.count) photo", forState: UIControlState.Normal)

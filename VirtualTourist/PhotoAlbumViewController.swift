@@ -16,7 +16,6 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     
     // Flag for deleting pictures
     var isDeleting = false
-    
     var editingFlag: Bool = false
     
     @IBOutlet weak var mapView: MKMapView!
@@ -209,19 +208,26 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
     
     @IBAction func editButtonTapped(sender: AnyObject) {
         
-        if editingFlag == false {
-            editingFlag = true
-            navigationItem.rightBarButtonItem?.title = "Done"
-            bottomButton.setTitle("Tap photos to delete", forState: UIControlState.Normal)
-        }
+        if(self.navigationItem.rightBarButtonItem?.title == "Edit"){
             
-        else if editingFlag {
-            navigationItem.rightBarButtonItem?.title = "Edit"
-            editingFlag = false
-            bottomButton.hidden = false
+            self.navigationItem.rightBarButtonItem?.title = "Done"
+            
+            for item in self.collectionView!.visibleCells() as! PhotoCollectionViewCell {
+                
+                let indexpath : NSIndexPath = self.collectionView!.indexPathForCell(item as PhotoCollectionViewCell)!
+                let cell : AlbumCell = self.collectionView!.cellForItemAtIndexPath(indexpath) as! PhotoCollectionViewCell
+                
+                //Close Button
+                let close : UIButton = cell.viewWithTag(102) as! UIButton
+                close.hidden = false
+            }
+        } else {
+            self.navigationItem.rightBarButtonItem?.title = "Edit"
+            self.collectionView?.reloadData()
         }
         
     }
+    
     // Remove photos from an album when user select a cell or multiple cells
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
        
@@ -236,7 +242,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
             self.navigationController?.pushViewController(myImageViewPage, animated: true)
         }
 
-        else if (editingFlag) {
+        else {
 
             // Configure the UI of the collection item
             let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoCollectionViewCell

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="goA-Ix-Nnn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="goA-Ix-Nnn">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -134,21 +134,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VLo-Eg-7aR">
-                                <rect key="frame" x="0.0" y="20" width="320" height="535"/>
-                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="eki-Ea-19E">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zLo-GS-OGg">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="504" id="js5-8u-Vo3"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="zLo-GS-OGg" firstAttribute="top" secondItem="eki-Ea-19E" secondAttribute="top" id="AEu-v9-PtN"/>
+                                    <constraint firstItem="zLo-GS-OGg" firstAttribute="leading" secondItem="eki-Ea-19E" secondAttribute="leading" id="OnW-Cz-MYR"/>
+                                    <constraint firstAttribute="trailing" secondItem="zLo-GS-OGg" secondAttribute="trailing" id="WRP-Hs-d9G"/>
+                                    <constraint firstAttribute="bottom" secondItem="zLo-GS-OGg" secondAttribute="bottom" id="gF8-l2-6g9"/>
+                                    <constraint firstItem="zLo-GS-OGg" firstAttribute="centerX" secondItem="eki-Ea-19E" secondAttribute="centerX" id="x9x-35-pYk"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="54J-uG-ahZ" id="yNd-bE-oJI"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="VLo-Eg-7aR" firstAttribute="top" secondItem="fU8-93-8QF" secondAttribute="top" constant="20" symbolic="YES" id="3VP-qM-075"/>
-                            <constraint firstItem="VLo-Eg-7aR" firstAttribute="leading" secondItem="fU8-93-8QF" secondAttribute="leading" id="C1F-SL-CC1"/>
-                            <constraint firstAttribute="trailing" secondItem="VLo-Eg-7aR" secondAttribute="trailing" id="qSb-bI-dMs"/>
-                            <constraint firstItem="iBA-T9-HYb" firstAttribute="top" secondItem="VLo-Eg-7aR" secondAttribute="bottom" constant="13" id="wo9-bL-O7L"/>
+                            <constraint firstItem="eki-Ea-19E" firstAttribute="top" secondItem="vpW-Y0-spw" secondAttribute="bottom" id="4U1-Cp-Kq0"/>
+                            <constraint firstItem="eki-Ea-19E" firstAttribute="bottom" secondItem="iBA-T9-HYb" secondAttribute="top" id="AnK-Ly-bqG"/>
+                            <constraint firstItem="eki-Ea-19E" firstAttribute="leading" secondItem="fU8-93-8QF" secondAttribute="leading" id="Dsr-s6-alY"/>
+                            <constraint firstAttribute="trailing" secondItem="eki-Ea-19E" secondAttribute="trailing" id="Yda-F1-yTX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Image Detail" id="mRc-9V-owN"/>
                     <connections>
-                        <outlet property="myImageView" destination="VLo-Eg-7aR" id="mkU-Qo-oFa"/>
+                        <outlet property="myImageView" destination="zLo-GS-OGg" id="HsA-pc-0On"/>
+                        <outlet property="scrollView" destination="eki-Ea-19E" id="3ww-st-AdO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xCB-KS-1n7" userLabel="First Responder" sceneMemberID="firstResponder"/>

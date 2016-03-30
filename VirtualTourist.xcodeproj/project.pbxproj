@@ -445,6 +445,7 @@
 		55AA11A11C59850000977620 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
 				INFOPLIST_FILE = VirtualTouristUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.millionstarsllC.VirtualTouristUITests;

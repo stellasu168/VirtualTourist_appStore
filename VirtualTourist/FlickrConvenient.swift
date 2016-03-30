@@ -48,7 +48,7 @@ extension FlickrClient {
                 if let photosDictionary = results.valueForKey(JSONResponseKeys.Photos) as? [String: AnyObject],
                     photosArray = photosDictionary[JSONResponseKeys.Photo] as? [[String : AnyObject]],
                     numberOfPhotoPages = photosDictionary[JSONResponseKeys.Pages] as? Int {
-                        
+                    
                         pin.pageNumber = numberOfPhotoPages
                         
                         self.numberOfPhotoDownloaded = photosArray.count

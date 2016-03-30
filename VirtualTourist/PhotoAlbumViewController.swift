@@ -177,11 +177,12 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         if(self.navigationItem.rightBarButtonItem?.title == "Edit"){
             
             self.navigationItem.rightBarButtonItem?.title = "Done"
+            
+            bottomButton.hidden = true
 
             for item in self.collectionView!.visibleCells() as! [PhotoCollectionViewCell] {
                 
                 let indexpath : NSIndexPath = self.collectionView!.indexPathForCell(item as PhotoCollectionViewCell)!
-                
                 let cell : PhotoCollectionViewCell = self.collectionView!.cellForItemAtIndexPath(indexpath) as! PhotoCollectionViewCell
                 
                 //Delete Button
@@ -191,6 +192,7 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
             self.navigationItem.rightBarButtonItem?.title = "Edit"
             self.collectionView?.reloadData()
             editingFlag = false
+            
         }
         
     }
@@ -223,8 +225,12 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, NSFetchedRe
         
         if self.navigationItem.rightBarButtonItem!.title == "Edit" {
             cell.deleteButton.hidden = true
+            bottomButton.hidden = false
+
         } else {
             cell.deleteButton?.hidden = false
+            bottomButton.hidden = true
+
         }
 
         cell.photoView.image = photo.image

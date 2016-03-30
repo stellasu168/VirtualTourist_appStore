@@ -46,7 +46,7 @@ class Photos: NSManagedObject {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
         self.url = photoURL
         self.pin = pin
-        print("init from Photos.swift\(url)")
+        //print("init from Photos.swift\(url)")
         
     }
     
